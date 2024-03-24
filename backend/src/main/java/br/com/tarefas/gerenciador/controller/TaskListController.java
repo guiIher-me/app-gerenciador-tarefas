@@ -1,7 +1,6 @@
 package br.com.tarefas.gerenciador.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tarefas.gerenciador.dto.tasklist.CreateTaskListDTO;
+import br.com.tarefas.gerenciador.dto.tasklist.GetTaskListDTO;
 import br.com.tarefas.gerenciador.model.TaskList;
 import br.com.tarefas.gerenciador.repository.TaskListRepository;
 import br.com.tarefas.gerenciador.service.TaskListService;
@@ -40,10 +40,10 @@ public class TaskListController {
     }
 
     @GetMapping(value="/{id}", produces="application/json")
-    public ResponseEntity<TaskList> getById(@PathVariable(value="id") @NonNull Long id) {
-        Optional<TaskList> tasklist = this.taskListRepository.findById(id);
-        taskListService.assertTaskList(tasklist.isPresent());
-        return ResponseEntity.ok().body(tasklist.get());
+    public ResponseEntity<GetTaskListDTO> getById(@PathVariable(value="id") @NonNull Long id) {
+        TaskList taskList = taskListService.getOrFail(id);
+        GetTaskListDTO taskListDTO = new GetTaskListDTO(taskList);
+        return ResponseEntity.ok().body(taskListDTO);
     }
 
     @GetMapping(value = "/", produces = "application/json")
@@ -53,13 +53,11 @@ public class TaskListController {
     }
 
     @PutMapping(value = "/{id}/title/{newTitle}", produces = "application/json")
-    public ResponseEntity<TaskList> updateName(
+    public ResponseEntity<TaskList> updateTitle(
         @PathVariable(value="id") @NonNull Long id,
         @PathVariable(value="newTitle") @NotBlank String newTitle) {
 
-        TaskList existingTaskList = this.taskListRepository.findById(id).orElse(null);
-        taskListService.assertTaskList(existingTaskList instanceof TaskList);
-
+        TaskList existingTaskList = taskListService.getOrFail(id);
         existingTaskList.setTitle(newTitle);
         TaskList updatedTaskList = this.taskListRepository.save(existingTaskList);
         return ResponseEntity.ok(updatedTaskList);
@@ -67,8 +65,7 @@ public class TaskListController {
 
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<Void> deleteById(@PathVariable(value="id") @NonNull Long id) {
-        taskListService.assertTaskList(this.taskListRepository.existsById(id));
-        this.taskListRepository.deleteById(id);
+        taskListService.deleteTaskListById(id);
         return ResponseEntity.noContent().build();
     }
     
