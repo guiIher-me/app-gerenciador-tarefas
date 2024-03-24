@@ -4,33 +4,27 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import br.com.tarefas.gerenciador.dto.tasklist.SimpleTaskListDTO;
-import br.com.tarefas.gerenciador.dto.user.SimpleUserDTO;
 import br.com.tarefas.gerenciador.model.Task;
 import lombok.Data;
 
 @Data
-public class GetTaskDTO {
+public class SimpleTaskDTO {
     private Long id;
     private String title;
-    private String description;
-    private SimpleUserDTO user;
-    private SimpleTaskListDTO list;
-    
+    private String userName;
+
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate startDate;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate endDate;
 
-    public GetTaskDTO() { }
+    public SimpleTaskDTO() { }
 
-    public GetTaskDTO(Task task) {
+    public SimpleTaskDTO(Task task) {
         this.id = task.getId();
         this.title = task.getTitle();
-        this.description = task.getDescription();
-        this.user = new SimpleUserDTO(task.getUser());
-        this.list = new SimpleTaskListDTO(task.getTaskList());
+        this.userName = task.getUser().getName();
         this.startDate = task.getStartDate();
         this.endDate = task.getEndDate();
     }
