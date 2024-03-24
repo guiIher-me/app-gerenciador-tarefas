@@ -30,9 +30,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ErrorResponse handleResourceNotFoundException() {
         int status = HttpStatus.NOT_FOUND.value();
-        String message = "Endpoint not found";
-
-        ErrorResponse errorResponse = new ErrorResponse(status, message);
+        ErrorResponse errorResponse = new ErrorResponse(status, "Endpoint not found");
         return errorResponse;
     }
 
@@ -56,6 +54,15 @@ public class GlobalExceptionHandler {
         String message = fieldError.getDefaultMessage();
 
         ErrorResponse errorResponse = new ErrorResponse(status, message);
+        return errorResponse;
+    }
+
+    @ExceptionHandler(HttpBadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse HttpBadRequestException(HttpBadRequestException ex) {
+        int status = HttpStatus.BAD_REQUEST.value();
+        ErrorResponse errorResponse = new ErrorResponse(status, ex.getMessage());
         return errorResponse;
     }
 }

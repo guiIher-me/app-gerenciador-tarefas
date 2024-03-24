@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.tarefas.gerenciador.dto.task.CreateTaskDTO;
 import br.com.tarefas.gerenciador.dto.task.GetTaskDTO;
 import br.com.tarefas.gerenciador.model.Task;
-import br.com.tarefas.gerenciador.repository.TaskRepository;
 import br.com.tarefas.gerenciador.service.TaskService;
 
 @RestController
@@ -26,28 +26,33 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @Autowired
-    private TaskRepository taskRepository;
-
     @PostMapping(value="/", produces="application/json")
-    public ResponseEntity<GetTaskDTO> createTask(@NonNull @Validated @RequestBody CreateTaskDTO createTaskDTO) {
+    public ResponseEntity<GetTaskDTO> create(@NonNull @Validated @RequestBody CreateTaskDTO createTaskDTO) {
         Task savedTask = taskService.createTask(createTaskDTO);
         GetTaskDTO taskDTO = new GetTaskDTO(savedTask);
         return ResponseEntity.status(HttpStatus.CREATED).body(taskDTO);
     }
 
     @GetMapping(value="/{id}", produces="application/json")
-    public ResponseEntity<GetTaskDTO> getTaskById(@NonNull @Validated @PathVariable Long id) {
+    public ResponseEntity<GetTaskDTO> getById(@NonNull @Validated @PathVariable Long id) {
         Task task = taskService.getOrFail(id);
         GetTaskDTO taskDTO = new GetTaskDTO(task);
         return ResponseEntity.ok().body(taskDTO);
     }
 
-    @SuppressWarnings("null")
+    @PutMapping(value="/{taskId}/move-to-list/{listId}", produces="application/json")
+    public ResponseEntity<GetTaskDTO> moveTaskToList(
+        @NonNull @Validated @PathVariable Long taskId,
+        @NonNull @Validated @PathVariable Long listId) {
+
+        Task updatedTask = taskService.moveTaskToList(taskId, listId);
+        GetTaskDTO taskDTO = new GetTaskDTO(updatedTask);
+        return ResponseEntity.ok().body(taskDTO);
+    }
+
     @DeleteMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<Void> deleteTask(@PathVariable("id") @NonNull Long id) {
-        Task task = taskService.getOrFail(id);
-        this.taskRepository.delete(task);
+    public ResponseEntity<Void> deleteById(@PathVariable("id") @NonNull Long id) {
+        taskService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 

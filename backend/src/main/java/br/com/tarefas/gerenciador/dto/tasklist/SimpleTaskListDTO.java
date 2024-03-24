@@ -1,14 +1,13 @@
-package br.com.tarefas.gerenciador.dto.task;
-
+package br.com.tarefas.gerenciador.dto.tasklist;
 import br.com.tarefas.gerenciador.model.TaskList;
 import lombok.Data;
 
 @Data
-public class GetTaskListDTO {
-    private Long id;
+public class SimpleTaskListDTO {
+    private Long id; 
     private String title;
 
-    public GetTaskListDTO(TaskList taskList) {
+    public SimpleTaskListDTO(TaskList taskList) {
         this.id = taskList.getId();
         this.title = taskList.getTitle();
     }

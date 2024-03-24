@@ -18,14 +18,14 @@ public class TaskListService {
     @SuppressWarnings("null")
     public TaskList getOrFail(Long taskListId) {
         TaskList previousTaskList = taskListRepository.findById(taskListId).orElse(null);
-        this.assertTaskList(previousTaskList != null);
+        this.assertTaskList(previousTaskList instanceof TaskList);
         return previousTaskList;
     }
 
     @SuppressWarnings("null")
     public TaskList getOrFail(Long taskListId, String failMessage) {
         TaskList previousTaskList = taskListRepository.findById(taskListId).orElse(null);
-        this.assertTaskList(previousTaskList != null, failMessage);
+        this.assertTaskList(previousTaskList instanceof TaskList, failMessage);
         return previousTaskList;
     }
 
@@ -37,7 +37,6 @@ public class TaskListService {
         if (!condition) throw new ResourceNotFoundException(message);
     }
 
-    @SuppressWarnings("null")
     public TaskList createTaskList(CreateTaskListDTO createTasklist) {
         Long previousListId = createTasklist.getPreviousListId();
 
@@ -69,6 +68,12 @@ public class TaskListService {
     private TaskList createTaskListAtEnd(TaskList taskList, Double lastPosition) {
         taskList.setPosition(lastPosition + 1);
         return taskListRepository.save(taskList);
+    }
+
+    @SuppressWarnings("null")
+    public void deleteTaskListById(Long id) {
+        TaskList taskList = getOrFail(id);
+        taskListRepository.delete(taskList);
     }
 
 }

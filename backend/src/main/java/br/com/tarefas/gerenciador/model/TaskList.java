@@ -1,13 +1,18 @@
 package br.com.tarefas.gerenciador.model;
 
+import java.util.List;
+
 import org.hibernate.boot.model.source.spi.Sortable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +30,10 @@ public class TaskList implements Sortable {
 
     @NotNull(message = "Field 'position' is mandatory")
     private Double position;
+
+    @OneToMany(mappedBy = "taskList", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Task> tasks;
 
     public TaskList() { }
 
@@ -54,7 +63,15 @@ public class TaskList implements Sortable {
 
     public void setPosition(Double position) {
         this.position = position;
-    }  
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     @Override
     public boolean isSorted() {

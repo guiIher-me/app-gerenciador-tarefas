@@ -38,7 +38,7 @@ public class TaskService {
     @SuppressWarnings("null")
     public Task getOrFail(Long taskId) {
         Task task = taskRepository.findById(taskId).orElse(null);
-        this.assertTask(task != null);
+        this.assertTask(task instanceof Task);
         return task;
     }
 
@@ -66,6 +66,21 @@ public class TaskService {
         
         Task savedTask = taskRepository.save(task);
         return savedTask;
+    }
+
+    public Task moveTaskToList(Long taskId, Long listId) {
+        Task task = this.getOrFail(taskId);
+        TaskList taskList = taskListService.getOrFail(listId);
+
+        task.setTaskList(taskList);
+        Task updatedTask = taskRepository.save(task);
+        return updatedTask;
+    }
+
+    @SuppressWarnings("null")
+    public void deleteById(Long id) {
+        Task task = getOrFail(id);
+        this.taskRepository.delete(task);
     }
     
 }
