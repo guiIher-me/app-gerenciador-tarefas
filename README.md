@@ -18,21 +18,6 @@ estágios de conclusão.
 
 > Caso tenha Docker instalado e configurado, rode o comando `docker-compose up --build`  para construir e inicializar o projeto sem instalar manualmente os requisitos necessários.
 
-## 🚀 Como Executar
-
-No diretório raiz do projeto, execute o terminal linux e siga o passo-a-passo abaixo:
-
- 1. Execute o comando `cd backend`  para ir para o diretório raiz do backend;
- 2. Execute o comando `mvnw spring-boot:run` para inicializar o projeto;
- 
-> Utilize a **collection postman** disponível no diretório raiz do projeto para obter mais informações sobre os endpoints disponíveis, além de exemplos de requests e responses.
-
-
-
-## 📖 Diagrama de Classes UML
-![alt text](https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/diagrams/mvp1.1/diagrama_classes_uml_mvp1.1.png)
-
-
 
 ## 📁 Estrutura Backend
 
@@ -49,6 +34,24 @@ No diretório raiz do projeto, execute o terminal linux e siga o passo-a-passo a
 │   └── util         # Contém as classes de utilidades
 
 ```
+
+
+## 🚀 Como Executar
+
+No diretório raiz do projeto, execute o terminal linux e siga o passo-a-passo abaixo:
+
+ 1. Execute o comando `cd backend`  para ir para o diretório raiz do backend;
+ 2. Execute o comando `mvnw spring-boot:run` para inicializar o projeto;
+ 
+> Utilize a **collection postman** disponível no diretório raiz do projeto para obter mais informações sobre os endpoints disponíveis, além de exemplos de requests e responses.
+
+
+
+## 📖 Diagrama de Classes UML
+<br>
+<p align="center">
+<img src="https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/diagrams/mvp1.1/diagrama_classes_uml_mvp1.1.png" width="600">
+</p>
 
 
 ## 📜  Licença
