@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.tarefas.gerenciador.dto.user.CreateUserDTO;
+import br.com.tarefas.gerenciador.dto.user.UpdateUserDTO;
 import br.com.tarefas.gerenciador.exception.HttpBadRequestException;
 import br.com.tarefas.gerenciador.model.Role;
 import br.com.tarefas.gerenciador.model.User;
@@ -63,15 +64,27 @@ public class UserService {
         return savedUser;
     }
 
-    public User updateById(Long id, User user) throws HttpBadRequestException {
-        User existingUser = getOrFail(id);        
+    @SuppressWarnings("null")
+    public User updateById(Long id, UpdateUserDTO user) throws HttpBadRequestException {
+        User existingUser = getOrFail(id);
         User userWithEmail = userRepository.findByEmail(user.getEmail());
         
         if (userWithEmail != null && !userWithEmail.getId().equals(id))
             throw new HttpBadRequestException("E-mail already in use by another user!");
+        
+        if (user.getName() != null)
+            existingUser.setName(user.getName());
 
-        existingUser.update(user);
-        return existingUser;
+        if (user.getEmail() != null)
+            existingUser.setEmail(user.getEmail());
+
+        if(user.getPassword() != null) {
+            existingUser.setPassword(user.getPassword());
+            encodePassword(existingUser);
+        }
+
+        User updatedUser = userRepository.save(existingUser);        
+        return updatedUser;
     }
 
     public void deleteById(Long id) {

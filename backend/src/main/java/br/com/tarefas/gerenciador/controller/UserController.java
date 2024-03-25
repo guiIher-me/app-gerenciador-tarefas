@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tarefas.gerenciador.dto.user.CreateUserDTO;
+import br.com.tarefas.gerenciador.dto.user.UpdateUserDTO;
 import br.com.tarefas.gerenciador.exception.HttpBadRequestException;
 import br.com.tarefas.gerenciador.model.User;
 import br.com.tarefas.gerenciador.repository.UserRepository;
@@ -33,7 +34,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping(value = "/", produces = "application/json")
-    public ResponseEntity<?> create(@NonNull @Validated @RequestBody CreateUserDTO createUser) throws HttpBadRequestException {
+    public ResponseEntity<User> create(@NonNull @Validated @RequestBody CreateUserDTO createUser) throws HttpBadRequestException {
         User savedUser = userService.create(createUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
@@ -50,8 +51,8 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
-    @PatchMapping(value="/users/{id}", produces="application/json")
-    public ResponseEntity<?> updateById(@PathVariable("id") @NonNull Long id, @Validated @RequestBody User user) throws HttpBadRequestException {
+    @PatchMapping(value="/{id}", produces="application/json")
+    public ResponseEntity<User> updateById(@PathVariable("id") @NonNull Long id, @Validated @RequestBody UpdateUserDTO user) throws HttpBadRequestException {
         User updatedUser = userService.updateById(id, user);
         return ResponseEntity.ok(updatedUser);
     }
