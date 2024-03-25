@@ -44,7 +44,7 @@ No diretório raiz do projeto, execute o terminal linux e siga o passo-a-passo a
  2. Execute o comando `mvnw spring-boot:run` para inicializar o projeto;
  
 > Utilize a **collection postman** disponível no diretório raiz do projeto para obter mais informações sobre os endpoints disponíveis, além de exemplos de requests e responses.
-
+> Você pode [pré-visualizar a collection aqui](https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/collection.md)
 
 
 ## 📖 Diagrama de Classes UML
