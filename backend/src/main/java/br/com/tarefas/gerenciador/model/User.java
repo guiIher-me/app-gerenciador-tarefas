@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,9 +18,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="users")
@@ -28,16 +26,11 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Field 'name' is mandatory")
     private String name;
 
-    @NotBlank(message = "Field 'email' is mandatory")
-    @Email(message = "Invalid email format")
     @Column(unique = true)
     private String email;
 
-    @NotBlank(message = "Field 'password' is mandatory")
-    @Size(min = 6, message = "Password must have at least 6 characters")
     @JsonIgnore
     private String password;
 
@@ -51,12 +44,6 @@ public class User implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "role_id"))
     @JsonIgnore
     private List<Role> roles = new ArrayList<Role>();
-
-    public void update(User user) {
-        this.name = user.getName();
-        this.email = user.getEmail();
-        this.password = user.getPassword();
-    }
 
     public Long getId() {
         return id;
