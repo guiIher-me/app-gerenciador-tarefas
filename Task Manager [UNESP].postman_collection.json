@@ -89,6 +89,104 @@
 							"body": "{\n    \"id\": 52,\n    \"name\": \"Mary Mock\",\n    \"email\": \"mary@mock.com\",\n    \"roleNames\": [\n        \"USER\"\n    ]\n}"
 						},
 						{
+							"name": "[400] Invalid Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Mary Mock\",\r\n    \"email\": \"marymock.com\",\r\n    \"password\": \"marymock123\",\r\n    \"roleNames\": [\"USER\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Mar 2024 01:03:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"Invalid email format\"\n}"
+						},
+						{
+							"name": "[400] Invalid Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Mary Mock\",\r\n    \"email\": \"mary@mock.com\",\r\n    \"password\": \"mary\",\r\n    \"roleNames\": [\"USER\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Mar 2024 01:02:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"Password must have at least 6 characters\"\n}"
+						},
+						{
 							"name": "[400] Email Exists",
 							"originalRequest": {
 								"method": "POST",
@@ -380,6 +478,327 @@
 							],
 							"cookie": [],
 							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Mr. Mock\",\n        \"email\": \"mock@mock.com\",\n        \"roleNames\": [\n            \"MANAGER\"\n        ]\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Testerson\",\n        \"email\": \"test@test.com\",\n        \"roleNames\": [\n            \"USER\"\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "updateById",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Testerson\",\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"testerson1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "[200] Success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Testerson\",\r\n    \"email\": \"test@test.com.br\",\r\n    \"password\": \"testerson123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Mar 2024 01:09:00 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"name\": \"Testerson\",\n    \"email\": \"test@test.com.br\",\n    \"roleNames\": [\n        \"USER\"\n    ]\n}"
+						},
+						{
+							"name": "[200] Update Name Only",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Testerson Jr.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Mar 2024 01:10:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"name\": \"Testerson Jr.\",\n    \"email\": \"test@test.com.br\",\n    \"roleNames\": [\n        \"USER\"\n    ]\n}"
+						},
+						{
+							"name": "[200] Update Password Only",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"testerson1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Mar 2024 01:11:16 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"name\": \"Testerson Jr.\",\n    \"email\": \"test@test.com.br\",\n    \"roleNames\": [\n        \"USER\"\n    ]\n}"
+						},
+						{
+							"name": "[400] Invalid Password",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Testerson\",\r\n    \"email\": \"mock@mock.com\",\r\n    \"password\": \"teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Mar 2024 01:11:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"Password must have at least 6 characters\"\n}"
+						},
+						{
+							"name": "[400] Email In Use",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Testerson\",\r\n    \"email\": \"mock@mock.com\",\r\n    \"password\": \"teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Mar 2024 01:09:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"E-mail already in use by another user!\"\n}"
 						}
 					]
 				},
@@ -754,7 +1173,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 23 Mar 2024 15:41:11 GMT"
+									"value": "Sun, 24 Mar 2024 20:17:42 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -766,7 +1185,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 1,\n    \"title\": \"To Do\"\n}"
+							"body": "{\n    \"id\": 1,\n    \"title\": \"To Do\",\n    \"position\": 1,\n    \"tasks\": [\n        {\n            \"id\": 2,\n            \"title\": \"Card 1\",\n            \"userName\": \"Testerson\",\n            \"startDate\": \"24/03/2015\",\n            \"endDate\": \"27/03/2015\"\n        },\n        {\n            \"id\": 52,\n            \"title\": \"Card 52\",\n            \"userName\": \"Testerson\",\n            \"startDate\": \"24/03/2015\",\n            \"endDate\": \"27/03/2015\"\n        }\n    ]\n}"
 						},
 						{
 							"name": "[404] Not Found",
@@ -1146,7 +1565,7 @@
 			]
 		},
 		{
-			"name": "tasks",
+			"name": "task",
 			"item": [
 				{
 					"name": "create",
@@ -1234,7 +1653,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 10,\r\n    \"startDate\": \"24/03/2024\",\r\n    \"endDate\": \"30/03/2024\"\r\n}",
+									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 10,\r\n    \"listId\": 1,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1287,7 +1706,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 10,\r\n    \"startDate\": \"24/03/2024\",\r\n    \"endDate\": \"30/03/2024\"\r\n}",
+									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 10,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1340,7 +1759,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 1,\r\n    \"startDate\": \"24/03/2024\",\r\n    \"endDate\": \"00/03/2024\"\r\n}",
+									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 1,\r\n    \"startDate\": \"00/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1384,7 +1803,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": 422,\n    \"message\": \"Invalid date '00/03/2024'\"\n}"
+							"body": "{\n    \"status\": 422,\n    \"message\": \"Invalid date '00/01/2024'\"\n}"
 						},
 						{
 							"name": "[422] Invalid End Date",
@@ -1393,7 +1812,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 1,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"32/03/2024\"\r\n}",
+									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 1,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"32/12/2024\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1437,7 +1856,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": 422,\n    \"message\": \"Invalid date '32/03/2024'\"\n}"
+							"body": "{\n    \"status\": 422,\n    \"message\": \"Invalid date '32/12/2024'\"\n}"
 						}
 					]
 				},
@@ -1563,6 +1982,205 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status\": 404,\n    \"message\": \"Task not found!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "moveToList",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/task/:taskId/move-to-list/:listId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"task",
+								":taskId",
+								"move-to-list",
+								":listId"
+							],
+							"variable": [
+								{
+									"key": "taskId",
+									"value": "2"
+								},
+								{
+									"key": "listId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "[200] Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/task/:taskId/move-to-list/:listId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"task",
+										":taskId",
+										"move-to-list",
+										":listId"
+									],
+									"variable": [
+										{
+											"key": "taskId",
+											"value": "2"
+										},
+										{
+											"key": "listId",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Mar 2024 20:29:20 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"title\": \"Card 1\",\n    \"description\": \"desc card\",\n    \"user\": {\n        \"id\": 2,\n        \"name\": \"Testerson\"\n    },\n    \"list\": {\n        \"id\": 3,\n        \"title\": \"Blocked\"\n    },\n    \"startDate\": \"24/03/2015\",\n    \"endDate\": \"27/03/2015\"\n}"
+						},
+						{
+							"name": "[404] Task Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/task/:taskId/move-to-list/:listId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"task",
+										":taskId",
+										"move-to-list",
+										":listId"
+									],
+									"variable": [
+										{
+											"key": "taskId",
+											"value": "10"
+										},
+										{
+											"key": "listId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Mar 2024 20:31:57 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 404,\n    \"message\": \"Task not found!\"\n}"
+						},
+						{
+							"name": "[404] List Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/task/:taskId/move-to-list/:listId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"task",
+										":taskId",
+										"move-to-list",
+										":listId"
+									],
+									"variable": [
+										{
+											"key": "taskId",
+											"value": "2"
+										},
+										{
+											"key": "listId",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Mar 2024 20:31:29 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 404,\n    \"message\": \"List not found!\"\n}"
 						}
 					]
 				},
