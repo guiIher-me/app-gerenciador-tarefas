@@ -3,12 +3,14 @@
 
 Implementação/Estudo de um app web para gerenciamento de tarefas colaborativa concebido para a disciplina de Sistemas Web, do curso de Bacharelado em Ciências da Computação, na Instituição Universidade Estadual Paulista "Júlio de Mesquita Filho" - UNESP
 
+
 ## 🎯 Objetivo
 
-O objetivo desta proposta é apresentar um **sistema de gerenciamento de tarefas**, uma
+O objetivo deste projeot é apresentar um **sistema de gerenciamento de tarefas**, uma
 ferramenta popular para organização de projetos. Nosso sistema oferecerá uma plataforma
 intuitiva e eficiente para que usuários possam criar, atribuir e monitorar tarefas em diferentes
 estágios de conclusão.
+
 
 ## 💻 Pré-requisitos
 
@@ -16,7 +18,7 @@ estágios de conclusão.
 - **Maven 3.6.3 ou posterior**: Maven é uma ferramenta de automação de construção usada para gerenciar dependências e construir seu projeto. Você pode baixar e instalar o Maven no site oficial do Apache: https://maven.apache.org/download.cgi
 - **PostgreSQL Database**: será necessário instalá-lo e configurá-lo na máquina. Você pode baixar e instalar o PostgreSQL no site oficial: https://www.postgresql.org/download/
 
-> Caso tenha Docker instalado e configurado, rode o comando `docker-compose up --build`  para construir e inicializar o projeto sem instalar manualmente os requisitos necessários.
+> Caso você tenha Docker instalado e configurado, não será preciso instalar manualmente os requisitos necessários. Parar saber mais leia a sessão "Como executar"
 
 
 ## 📁 Estrutura Backend
@@ -42,9 +44,21 @@ No diretório raiz do projeto, execute o terminal linux e siga o passo-a-passo a
 
  1. Execute o comando `cd backend`  para ir para o diretório raiz do backend;
  2. Execute o comando `mvnw spring-boot:run` para inicializar o projeto;
- 
-> Utilize a **collection postman** disponível no diretório raiz do projeto para obter mais informações sobre os endpoints disponíveis, além de exemplos de requests e responses.
-> Você pode [pré-visualizar a collection aqui](https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/collection.md)
+ 3. Enjoy!
+
+
+## 🐋 Como Executar via Docker
+
+No diretório raiz do projeto, execute o terminal e siga o passo-a-passo abaixo:
+ 1. Execute o comando cd backend para ir para o diretório raiz do backend;
+ 2. Rode o comando `docker-compose up --build`  para construir e inicializar o projeto
+ 3. Enjoy!
+
+
+## 📨 Requisições e Respostas HTTP
+
+ - Utilize a **collection postman** disponível no diretório raiz do projeto para obter mais informações sobre os endpoints disponíveis, além de exemplos de requests e responses.
+ - Você pode [pré-visualizar a collection aqui](https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/collection.md)
 
 
 ## 📖 Diagrama de Classes UML
