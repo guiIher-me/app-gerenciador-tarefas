@@ -18,7 +18,7 @@ estágios de conclusão.
 - **Maven 3.6.3 ou posterior**: Maven é uma ferramenta de automação de construção usada para gerenciar dependências e construir seu projeto. Você pode baixar e instalar o Maven no site oficial do Apache: https://maven.apache.org/download.cgi
 - **PostgreSQL Database**: será necessário instalá-lo e configurá-lo na máquina. Você pode baixar e instalar o PostgreSQL no site oficial: https://www.postgresql.org/download/
 
-> Caso você tenha Docker instalado e configurado, não será preciso instalar manualmente os requisitos necessários. Parar saber mais leia a sessão "Como executar"
+> Caso você tenha Docker instalado e configurado, não será preciso instalar manualmente os requisitos necessários. Para saber mais, leia a seção "**Como executar via Docker**".
 
 
 ## 📁 Estrutura Backend
