@@ -1,9 +1,5 @@
 package br.com.tarefas.gerenciador.api.initializer;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,13 +7,12 @@ import org.springframework.stereotype.Component;
 
 import br.com.tarefas.gerenciador.dto.task.CreateTaskDTO;
 import br.com.tarefas.gerenciador.dto.tasklist.CreateTaskListDTO;
-import br.com.tarefas.gerenciador.model.Role;
 import br.com.tarefas.gerenciador.model.User;
+import br.com.tarefas.gerenciador.model.UserRole;
 import br.com.tarefas.gerenciador.repository.UserRepository;
 import br.com.tarefas.gerenciador.service.TaskListService;
 import br.com.tarefas.gerenciador.service.TaskService;
 import jakarta.transaction.Transactional;
-import br.com.tarefas.gerenciador.repository.RoleRepository;
 import br.com.tarefas.gerenciador.repository.TaskListRepository;
 
 @Component
@@ -25,9 +20,6 @@ public class DevDataInitializer implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
 
     @Autowired
     private TaskListService taskListService;
@@ -44,13 +36,9 @@ public class DevDataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        // Add roles
-        Role roleManager = findOrCreateRole("MANAGER");
-        Role roleUser = findOrCreateRole("USER");
-
         // Add users
-        this.addUser("Mr. Mock", "mock@mock.com", "mock123", Arrays.asList(roleManager));
-        this.addUser("Testerson", "test@test.com", "test123", Arrays.asList(roleUser));
+        this.addUser("Mr. Mock", "mock@mock.com", "mock123", UserRole.ADMIN);
+        this.addUser("Testerson", "test@test.com", "test123", UserRole.USER);
 
         // Add Task Lists
         this.addList("To Do");
@@ -64,22 +52,14 @@ public class DevDataInitializer implements CommandLineRunner {
 
     }
 
-    private Role findOrCreateRole(String roleName) {
-        Optional<Role> roleOptional = roleRepository.findByName(roleName);
-        return roleOptional.orElseGet(() -> {
-            Role newRole = new Role(roleName);
-            return roleRepository.save(newRole);
-        });
-    }
-
     @Transactional
-    private void addUser(String name, String email, String password, List<Role> roles) {
+    private void addUser(String name, String email, String password, UserRole role) {
         if (!userRepository.existsByEmail(email)) {
             User user = new User();
             user.setName(name);
             user.setEmail(email);
             user.setPassword(passwordEncoder.encode(password));
-            user.setRoles(roles);
+            user.setRole(role);
 
             userRepository.save(user);
         }
