@@ -74,7 +74,10 @@ No diretório raiz do projeto, execute o terminal e siga o passo-a-passo abaixo:
 > Você pode [pré-visualizar a collection aqui](https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/collection.md) gerada automaticamente via comando `postman-to-markdown Task\ Manager\ \[UNESP\].postman_collection.json` da lib postman-to-markdown.
 
 ## 📖 Diagrama de Classes UML
+Diagrama de Classes UML gerado pela ferramenta [Visual Paradigm Online](https://online.visual-paradigm.com/drive/):
+
 <br>
+
 <p align="center">
 <img src="https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/diagrams/mvp1.1/diagrama_classes_uml_mvp1.1.png" width="600">
 </p>
