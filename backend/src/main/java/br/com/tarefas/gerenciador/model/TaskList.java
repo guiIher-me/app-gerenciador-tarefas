@@ -37,8 +37,9 @@ public class TaskList implements Sortable {
 
     public TaskList() { }
 
-    public TaskList(String title) {
+    public TaskList(String title, Double position) {
         this.title = title;
+        this.position = position;
     }
 
     public Long getId() {

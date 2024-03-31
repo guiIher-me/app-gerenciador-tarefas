@@ -100,6 +100,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority ADMIN = new SimpleGrantedAuthority("ROLE_ADMIN"); 
         SimpleGrantedAuthority USER = new SimpleGrantedAuthority("ROLE_USER");
@@ -111,16 +112,19 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
@@ -128,6 +132,11 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return this.getName() + " " + this.getEmail() + " " + this.getPassword();
     }
 
 }

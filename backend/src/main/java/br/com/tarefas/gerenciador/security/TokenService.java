@@ -20,8 +20,8 @@ public class TokenService {
     @Value("${security.config.key}")
     private String secret;
 
-    public String generateToken(User user ){
-        try{
+    public String generateToken(User user) {
+        try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("auth-api")
@@ -46,7 +46,7 @@ public class TokenService {
                     .build()
                     .verify(token)
                     .getSubject();
-        } catch (JWTVerificationException exception){
+        } catch (JWTVerificationException exception) {
             System.out.println(exception);
             return "";
         }

@@ -5,10 +5,11 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.tarefas.gerenciador.dto.user.RegisterUserDTO;
+import br.com.tarefas.gerenciador.dto.auth.RegisterUserDTO;
 import br.com.tarefas.gerenciador.dto.user.UpdateUserDTO;
 import br.com.tarefas.gerenciador.exception.HttpBadRequestException;
 import br.com.tarefas.gerenciador.model.User;
+import br.com.tarefas.gerenciador.model.UserRole;
 import br.com.tarefas.gerenciador.repository.UserRepository;
 
 @Service
@@ -31,21 +32,36 @@ public class UserService {
         if (!condition) throw new ResourceNotFoundException("User not found!");
     }
 
+    public UserRole getUserRole(RegisterUserDTO registerUser) throws HttpBadRequestException {
+        try {
+            String userRole = registerUser.getRole();
+            return UserRole.valueOf(userRole);
+        } catch(Exception e) {
+            throw new HttpBadRequestException("Invalid Role value!");
+        }
+    }
+
     public void encodePassword(User user) {
         String password = user.getPassword();
         user.setPassword(encoder.encode(password));
     }
 
+    public User registerToUser(RegisterUserDTO registerUser) throws HttpBadRequestException {
+        User user = new User();
+        user.setName(registerUser.getName());
+        user.setEmail(registerUser.getLogin());
+        user.setPassword(registerUser.getPassword());
+        user.setRole(this.getUserRole(registerUser));
+
+        return user;
+    }
+
+    @SuppressWarnings("null")
     public User register(RegisterUserDTO registerUser) throws HttpBadRequestException {
         if (userRepository.existsByEmail(registerUser.getLogin()))
             throw new HttpBadRequestException("E-mail already exists!");
 
-        User user = new User();
-        user.setName(registerUser.getLogin());
-        user.setEmail(registerUser.getLogin());
-        user.setPassword(registerUser.getPassword());
-        user.setRole(registerUser.getRole());
-
+        User user = this.registerToUser(registerUser);
         encodePassword(user);
 
         User savedUser = userRepository.save(user);

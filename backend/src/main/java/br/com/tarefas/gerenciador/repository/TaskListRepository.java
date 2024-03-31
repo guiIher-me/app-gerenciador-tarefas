@@ -19,6 +19,9 @@ public interface TaskListRepository extends JpaRepository<TaskList, Long> {
     @Query("SELECT t FROM TaskList t ORDER BY t.position ASC")
     @NonNull List<TaskList> findAll();
 
+    @Query("SELECT COALESCE(MIN(t.position), 0.0) FROM TaskList t")
+    Double findMinPosition();
+
     @Query("SELECT COALESCE(MAX(t.position), 0.0) FROM TaskList t")
     Double findMaxPosition();
 
