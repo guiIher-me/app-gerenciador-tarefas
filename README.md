@@ -6,7 +6,7 @@ Implementação/Estudo de um app web para gerenciamento de tarefas colaborativa 
 
 ## 🎯 Objetivo
 
-O objetivo deste projeot é apresentar um **sistema de gerenciamento de tarefas**, uma
+O objetivo deste projeto é apresentar um **sistema de gerenciamento de tarefas**, uma
 ferramenta popular para organização de projetos. Nosso sistema oferecerá uma plataforma
 intuitiva e eficiente para que usuários possam criar, atribuir e monitorar tarefas em diferentes
 estágios de conclusão.
