@@ -6,7 +6,7 @@ Implementação/Estudo de um app web para gerenciamento de tarefas colaborativa 
 
 ## 🎯 Objetivo
 
-O objetivo deste projeot é apresentar um **sistema de gerenciamento de tarefas**, uma
+O objetivo deste projeto é apresentar um **sistema de gerenciamento de tarefas**, uma
 ferramenta popular para organização de projetos. Nosso sistema oferecerá uma plataforma
 intuitiva e eficiente para que usuários possam criar, atribuir e monitorar tarefas em diferentes
 estágios de conclusão.
@@ -41,24 +41,35 @@ estágios de conclusão.
 ## 🚀 Como Executar
 
 No diretório raiz do projeto, execute o terminal linux e siga o passo-a-passo abaixo:
-
- 1. Execute o comando `cd backend`  para ir para o diretório raiz do backend;
- 2. Execute o comando `mvnw spring-boot:run` para inicializar o projeto;
- 3. Enjoy!
+ 1. No arquivo **application.properties**, modifique a propriedade *spring.datasource.url* para: `spring.datasource.url=jdbc:postgresql://localhost:5432/task_manager`
+ 2. Execute o comando `cd backend`  para ir para o diretório raiz do backend;
+ 3. Execute o comando `mvnw spring-boot:run` para inicializar o projeto;
+ 4. Enjoy!
 
 
 ## 🐋 Como Executar via Docker
 
 No diretório raiz do projeto, execute o terminal e siga o passo-a-passo abaixo:
- 1. Execute o comando cd backend para ir para o diretório raiz do backend;
- 2. Rode o comando `docker-compose up --build`  para construir e inicializar o projeto
- 3. Enjoy!
+ 1. No arquivo **application.properties**, modifique a propriedade *spring.datasource.url* para: `spring.datasource.url=jdbc:postgresql://db:5432/task_manager`
+ 2. Execute o comando `cd backend` para ir para o diretório raiz do backend;
+ 3. Inicie o Docker. Caso esteja usando WSL, habilite a integração no app Docker Desktop > Settings > Resources > "Enable integration with additional distros";
+ 4. Rode o comando `docker-compose up --build`  para construir e inicializar o projeto;
+ 5. Enjoy!
+
+#### Como executar comandos SQL no DB Postgres via Docker:
+ 1. Execute o comando `cd backend` para ir para o diretório raiz do backend;
+ 2. Rode o comando `docker ps` para ver os containers que estão atualmente em execução;
+ 3. Copie o *CONTAINER ID* da imagem postgres;
+ 4. Execute o comando `docker exec -it containerid  bash`, substituindo '*containerid*' pelo id copiado no passo 3. Este comando executará o bash da imagem postgres;
+ 5. Execute o comando `psql task_manager` para acessar o banco de dados '*task_manager*' do projeto;
+ 6. Execute os comandos SQL que desejar, como por exemplo: `SELECT * FROM users;`.
+ 7. Para sair do termimal bash da imagem execute o comando `exit` 2 vezes seguidas.
 
 
-## 📨 Requisições e Respostas HTTP
-
- - Utilize a **collection postman** disponível no diretório raiz do projeto para obter mais informações sobre os endpoints disponíveis, além de exemplos de requests e responses.
- - Você pode [pré-visualizar a collection aqui](https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/collection.md)
+## 📨 Requisições e Respostas HTTP via POSTMAN
+ - Utilize a **Collection Postman** disponível no diretório raiz do projeto para obter mais informações sobre os endpoints disponíveis, além de exemplos de requests e responses.
+ - Você pode [pré-visualizar a collection aqui](https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/collection.md) gerado automaticamente via comando `postman-to-markdown Task\ Manager\ \[UNESP\].postman_collection.json` da lib postman-to-markdown.
+ - 
 
 
 ## 📖 Diagrama de Classes UML

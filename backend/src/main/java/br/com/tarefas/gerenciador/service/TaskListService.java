@@ -40,11 +40,8 @@ public class TaskListService {
     public TaskList createTaskList(CreateTaskListDTO createTasklist) {
         Long previousListId = createTasklist.getPreviousListId();
 
-        TaskList taskList = new TaskList();
-        taskList.setTitle(createTasklist.getTitle());
-
         if (previousListId == null)
-            return this.createTaskListAtEnd(taskList);
+            return this.createTaskListAtStart(createTasklist);
         
         TaskList previousTaskList = this.getOrFail(previousListId, "Previous List ID not found!");
 
@@ -52,21 +49,29 @@ public class TaskListService {
         TaskList nextTaskList = taskListRepository.findFirstByPositionGreaterThan(previousPosition).orElse(null);
 
         if (nextTaskList == null)
-            return this.createTaskListAtEnd(taskList, previousPosition);
+            return this.createTaskListAtEnd(previousTaskList, createTasklist);
 
-        Double nextPosition = nextTaskList.getPosition();
-        Double middlePosition = (previousPosition + nextPosition) / 2;
-        taskList.setPosition(middlePosition);
+        return this.createTaskListAtMiddle(previousTaskList, createTasklist, nextTaskList);
+    }
+
+    private TaskList createTaskListAtStart(CreateTaskListDTO createTasklist) {
+        Double firstPosition = taskListRepository.findMinPosition();
+        TaskList taskList = new TaskList(createTasklist.getTitle(), firstPosition);
         return taskListRepository.save(taskList);
     }
 
-    private TaskList createTaskListAtEnd(TaskList taskList) {
-        Double lastPosition = taskListRepository.findMaxPosition();
-        return createTaskListAtEnd(taskList, lastPosition);
+    private TaskList createTaskListAtMiddle(TaskList previousTaskList, CreateTaskListDTO createTasklist, TaskList nextTaskList) {
+        Double previousPosition = previousTaskList.getPosition();
+        Double nextPosition = nextTaskList.getPosition();
+        Double middlePosition = (previousPosition + nextPosition) / 2;
+
+        TaskList taskList = new TaskList(createTasklist.getTitle(), middlePosition);
+        return taskListRepository.save(taskList);
     }
 
-    private TaskList createTaskListAtEnd(TaskList taskList, Double lastPosition) {
-        taskList.setPosition(lastPosition + 1);
+    private TaskList createTaskListAtEnd(TaskList lastTaskList, CreateTaskListDTO createTasklist) {
+        Double lastPosition = lastTaskList.getPosition() + 1.0;
+        TaskList taskList = new TaskList(createTasklist.getTitle(), lastPosition);
         return taskListRepository.save(taskList);
     }
 
