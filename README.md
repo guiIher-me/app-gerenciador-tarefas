@@ -62,15 +62,16 @@ No diretório raiz do projeto, execute o terminal e siga o passo-a-passo abaixo:
  3. Copie o *CONTAINER ID* da imagem postgres;
  4. Execute o comando `docker exec -it containerid  bash`, substituindo '*containerid*' pelo id copiado no passo 3. Este comando executará o bash da imagem postgres;
  5. Execute o comando `psql task_manager` para acessar o banco de dados '*task_manager*' do projeto;
- 6. Execute os comandos SQL que desejar, como por exemplo: `SELECT * FROM users;`.
+ 6. Execute os comandos SQL que desejar, como por exemplo: `SELECT * FROM users;`;
  7. Para sair do termimal bash da imagem execute o comando `exit` 2 vezes seguidas.
 
+<br/>
 
 ## 📨 Requisições e Respostas HTTP via POSTMAN
- - Utilize a **Collection Postman** disponível no diretório raiz do projeto para obter mais informações sobre os endpoints disponíveis, além de exemplos de requests e responses.
- - Você pode [pré-visualizar a collection aqui](https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/collection.md) gerado automaticamente via comando `postman-to-markdown Task\ Manager\ \[UNESP\].postman_collection.json` da lib postman-to-markdown.
- - 
+ - Utilize a **Collection Postman** disponível no diretório raiz do projeto para obter mais informações sobre os endpoints disponíveis, além de exemplos de requests e responses;
+ - Ao realizar o login diretamente pela collection, o bearer-token será salvo automaticamente como variável global da collection, permitindo executar os demais endpoints facilmente;
 
+> Você pode [pré-visualizar a collection aqui](https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/collection.md) gerada automaticamente via comando `postman-to-markdown Task\ Manager\ \[UNESP\].postman_collection.json` da lib postman-to-markdown.
 
 ## 📖 Diagrama de Classes UML
 <br>
