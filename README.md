@@ -31,7 +31,7 @@ estágios de conclusão.
 │   ├── exception    # Define tratamento de exceções específicas
 │   ├── model        # Contém as classes de modelagem de banco de dados
 │   ├── repository   # Contém as classes de acesso ao banco de dados
-│   ├── security     # Contém as classes de segurança da API
+│   ├── security     # Contém as classes de segurança e token jwt da API
 │   ├── service      # Contém as classes de serviço da API
 │   └── util         # Contém as classes de utilidades
 

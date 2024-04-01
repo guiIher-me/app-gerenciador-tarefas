@@ -7,16 +7,43 @@
 	},
 	"item": [
 		{
-			"name": "user",
+			"name": "auth",
 			"item": [
 				{
-					"name": "create",
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful token retrieval\", function () {\r",
+									" \r",
+									"  if (pm.response.to.have.status(200)) {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    if (jsonData.token) { // Check if the response has a \"token\" property\r",
+									"        pm.globals.set(\"bearerToken\", jsonData.token);\r",
+									"        pm.response.to.have.status(200); // Check for status code 200\r",
+									"    } else {\r",
+									"        pm.warn(\"Response does not contain a 'token' property\");\r",
+									"    }\r",
+									"  }\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mary Mock\",\r\n    \"email\": \"mary@mock.com\",\r\n    \"password\": \"marymock123\",\r\n    \"roleNames\": [\"USER\"]\r\n}",
+							"raw": "{\r\n    \"login\": \"test@test.com\",\r\n    \"password\": \"test1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,25 +51,25 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/user/",
+							"raw": "{{baseUrl}}/auth/login",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"user",
-								""
+								"auth",
+								"login"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "[201] Created",
+							"name": "[200] Success",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Mary Mock\",\r\n    \"email\": \"mary@mock.com\",\r\n    \"password\": \"marymock123\",\r\n    \"roleNames\": [\"USER\"]\r\n}",
+									"raw": "{\r\n    \"login\": \"login@example.com\",\r\n    \"password\": \"example123\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -50,20 +77,56 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/user/",
+									"raw": "{{baseUrl}}/auth/login",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"user",
-										""
+										"auth",
+										"login"
 									]
 								}
 							},
-							"status": "Created",
-							"code": 201,
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
 								{
 									"key": "Content-Type",
 									"value": "application/json"
@@ -74,7 +137,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 23 Mar 2024 15:13:10 GMT"
+									"value": "Fri, 29 Mar 2024 02:38:22 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -86,16 +149,16 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 52,\n    \"name\": \"Mary Mock\",\n    \"email\": \"mary@mock.com\",\n    \"roleNames\": [\n        \"USER\"\n    ]\n}"
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6InRlc3QxMUB0ZXN0LmNvbSIsImV4cCI6MTcxMTY5NzkwMn0.mILfskZgbqFNCdrEWbfnJxXTi51eR3B5nFb-4UqpOuM\"\n}"
 						},
 						{
-							"name": "[400] Invalid Email",
+							"name": "[401] Unauthorized",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Mary Mock\",\r\n    \"email\": \"marymock.com\",\r\n    \"password\": \"marymock123\",\r\n    \"roleNames\": [\"USER\"]\r\n}",
+									"raw": "{\r\n    \"login\": \"unauthorized@example.com\",\r\n    \"password\": \"example123\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -103,48 +166,115 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/user/",
+									"raw": "{{baseUrl}}/auth/login",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"user",
-										""
+										"auth",
+										"login"
 									]
 								}
 							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "plain",
 							"header": [
 								{
-									"key": "Content-Type",
-									"value": "application/json"
+									"key": "Vary",
+									"value": "Origin"
 								},
 								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 25 Mar 2024 01:03:31 GMT"
+									"value": "Fri, 29 Mar 2024 02:41:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
 								},
 								{
 									"key": "Connection",
-									"value": "close"
+									"value": "keep-alive"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": 400,\n    \"message\": \"Invalid email format\"\n}"
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
 						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"New Test\",\r\n    \"login\": \"new@test.com\",\r\n    \"password\": \"test123\",\r\n    \"role\": \"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
 						{
-							"name": "[400] Invalid Password",
+							"name": "[200] Success",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Mary Mock\",\r\n    \"email\": \"mary@mock.com\",\r\n    \"password\": \"mary\",\r\n    \"roleNames\": [\"USER\"]\r\n}",
+									"raw": "{\r\n    \"name\": \"New Test\",\r\n    \"login\": \"new@test.com\",\r\n    \"password\": \"test123\",\r\n    \"role\": \"ADMIN\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -152,39 +282,75 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/user/",
+									"raw": "{{baseUrl}}/auth/register",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"user",
-										""
+										"auth",
+										"register"
 									]
 								}
 							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "plain",
 							"header": [
 								{
-									"key": "Content-Type",
-									"value": "application/json"
+									"key": "Vary",
+									"value": "Origin"
 								},
 								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 25 Mar 2024 01:02:58 GMT"
+									"value": "Sun, 31 Mar 2024 01:19:44 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
 								},
 								{
 									"key": "Connection",
-									"value": "close"
+									"value": "keep-alive"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": 400,\n    \"message\": \"Password must have at least 6 characters\"\n}"
+							"body": null
 						},
 						{
 							"name": "[400] Email Exists",
@@ -193,7 +359,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Mr. Mock 2\",\r\n    \"email\": \"mock@mock.com\",\r\n    \"password\": \"marymock123\",\r\n    \"roleNames\": [\"MASTER\"]  \r\n}",
+									"raw": "{\r\n    \"name\": \"New Test\",\r\n    \"login\": \"new.test@test.com\",\r\n    \"password\": \"test123\",\r\n    \"role\": \"ADMIN\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -201,13 +367,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/user/",
+									"raw": "{{baseUrl}}/auth/register",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"user",
-										""
+										"auth",
+										"register"
 									]
 								}
 							},
@@ -215,6 +381,42 @@
 							"code": 400,
 							"_postman_previewlanguage": "json",
 							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
 								{
 									"key": "Content-Type",
 									"value": "application/json"
@@ -225,7 +427,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 23 Mar 2024 15:02:24 GMT"
+									"value": "Wed, 27 Mar 2024 02:09:27 GMT"
 								},
 								{
 									"key": "Connection",
@@ -236,13 +438,13 @@
 							"body": "{\n    \"status\": 400,\n    \"message\": \"E-mail already exists!\"\n}"
 						},
 						{
-							"name": "[404] Role Not Found",
+							"name": "[400] Invalid Role",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Mary Mock\",\r\n    \"email\": \"mary@master.com\",\r\n    \"password\": \"marymock123\",\r\n    \"roleNames\": [\"MASTER\"]  \r\n}",
+									"raw": "{\r\n    \"name\": \"New Test\",\r\n    \"login\": \"new.test1@test.com\",\r\n    \"password\": \"tes\",\r\n    \"role\": \"ADMINN\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -250,20 +452,56 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/user/",
+									"raw": "{{baseUrl}}/auth/register",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"user",
-										""
+										"auth",
+										"register"
 									]
 								}
 							},
-							"status": "Not Found",
-							"code": 404,
+							"status": "Bad Request",
+							"code": 400,
 							"_postman_previewlanguage": "json",
 							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
 								{
 									"key": "Content-Type",
 									"value": "application/json"
@@ -274,28 +512,26 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 23 Mar 2024 15:15:01 GMT"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=60"
+									"value": "Wed, 27 Mar 2024 02:17:48 GMT"
 								},
 								{
 									"key": "Connection",
-									"value": "keep-alive"
+									"value": "close"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": 404,\n    \"message\": \"Role not found with name: MASTER\"\n}"
+							"body": "{\n    \"status\": 400,\n    \"message\": \"Invalid Role value!\"\n}"
 						}
 					]
-				},
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
 				{
 					"name": "getById",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -343,6 +579,42 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json"
 								},
@@ -352,7 +624,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 23 Mar 2024 14:46:45 GMT"
+									"value": "Sun, 31 Mar 2024 01:46:16 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -364,7 +636,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 1,\n    \"name\": \"Mr. Mock\",\n    \"email\": \"mock@mock.com\",\n    \"roleNames\": [\n        \"MANAGER\"\n    ]\n}"
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Mr. Mock\",\n    \"email\": \"mock@mock.com\",\n    \"role\": \"ADMIN\",\n    \"enabled\": true,\n    \"username\": \"mock@mock.com\"\n}"
 						},
 						{
 							"name": "[404] Not Found",
@@ -456,6 +728,42 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json"
 								},
@@ -465,7 +773,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 23 Mar 2024 14:44:56 GMT"
+									"value": "Sun, 31 Mar 2024 01:44:57 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -477,7 +785,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Mr. Mock\",\n        \"email\": \"mock@mock.com\",\n        \"roleNames\": [\n            \"MANAGER\"\n        ]\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Testerson\",\n        \"email\": \"test@test.com\",\n        \"roleNames\": [\n            \"USER\"\n        ]\n    }\n]"
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Mr. Mock\",\n        \"email\": \"mock@mock.com\",\n        \"role\": \"ADMIN\",\n        \"enabled\": true,\n        \"username\": \"mock@mock.com\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Testerson\",\n        \"email\": \"test@test.com\",\n        \"role\": \"USER\",\n        \"enabled\": true,\n        \"username\": \"test@test.com\"\n    }\n]"
 						}
 					]
 				},
@@ -805,9 +1113,6 @@
 				{
 					"name": "deleteById",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -2304,6 +2609,16 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
