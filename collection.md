@@ -1,49 +1,67 @@
 # Project: Task Manager [UNESP]
-# 📁 Collection: user 
+# 📁 Collection: auth 
 
 
-## End-point: create
+## End-point: login
 ### Method: POST
 >```
->{{baseUrl}}/user/
+>{{baseUrl}}/auth/login
 >```
 ### Body (**raw**)
 
 ```json
 {
-    "name": "Mary Mock",
-    "email": "mary@mock.com",
-    "password": "marymock123",
-    "roleNames": ["USER"]
+    "login": "test@test.com",
+    "password": "test1234"
 }
 ```
+
+### 🔑 Authentication noauth
+
+|Param|value|Type|
+|---|---|---|
+
+
+### Response: 200
+```json
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6InRlc3QxMUB0ZXN0LmNvbSIsImV4cCI6MTcxMTY5NzkwMn0.mILfskZgbqFNCdrEWbfnJxXTi51eR3B5nFb-4UqpOuM"
+}
+```
+
+### Response: 401
+```json
+null
+```
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: register
+### Method: POST
+>```
+>{{baseUrl}}/auth/register
+>```
+### Body (**raw**)
+
+```json
+{
+    "name": "New Test",
+    "login": "new@test.com",
+    "password": "test123",
+    "role": "USER"
+}
+```
+
+### 🔑 Authentication noauth
+
+|Param|value|Type|
+|---|---|---|
+
 
 ### Response: 201
 ```json
-{
-    "id": 52,
-    "name": "Mary Mock",
-    "email": "mary@mock.com",
-    "roleNames": [
-        "USER"
-    ]
-}
-```
-
-### Response: 400
-```json
-{
-    "status": 400,
-    "message": "Invalid email format"
-}
-```
-
-### Response: 400
-```json
-{
-    "status": 400,
-    "message": "Password must have at least 6 characters"
-}
+null
 ```
 
 ### Response: 400
@@ -54,37 +72,33 @@
 }
 ```
 
-### Response: 404
+### Response: 400
 ```json
 {
-    "status": 404,
-    "message": "Role not found with name: MASTER"
+    "status": 400,
+    "message": "Invalid Role value!"
 }
 ```
 
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+# 📁 Collection: user 
+
 
 ## End-point: getById
 ### Method: GET
 >```
 >{{baseUrl}}/user/:id
 >```
-### 🔑 Authentication noauth
-
-|Param|value|Type|
-|---|---|---|
-
-
 ### Response: 200
 ```json
 {
     "id": 1,
     "name": "Mr. Mock",
     "email": "mock@mock.com",
-    "roleNames": [
-        "MANAGER"
-    ]
+    "role": "ADMIN",
+    "enabled": true,
+    "username": "mock@mock.com"
 }
 ```
 
@@ -111,17 +125,17 @@
         "id": 1,
         "name": "Mr. Mock",
         "email": "mock@mock.com",
-        "roleNames": [
-            "MANAGER"
-        ]
+        "role": "ADMIN",
+        "enabled": true,
+        "username": "mock@mock.com"
     },
     {
         "id": 2,
         "name": "Testerson",
         "email": "test@test.com",
-        "roleNames": [
-            "USER"
-        ]
+        "role": "USER",
+        "enabled": true,
+        "username": "test@test.com"
     }
 ]
 ```
@@ -204,12 +218,6 @@
 >```
 >{{baseUrl}}/user/:id
 >```
-### 🔑 Authentication noauth
-
-|Param|value|Type|
-|---|---|---|
-
-
 ### Response: 204
 ```json
 null
