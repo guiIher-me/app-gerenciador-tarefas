@@ -1,6 +1,8 @@
 package br.com.tarefas.gerenciador.dto.task;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -11,7 +13,7 @@ import lombok.Data;
 public class SimpleTaskDTO {
     private Long id;
     private String title;
-    private String userName;
+    private List<String> usersNames;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate startDate;
@@ -24,7 +26,11 @@ public class SimpleTaskDTO {
     public SimpleTaskDTO(Task task) {
         this.id = task.getId();
         this.title = task.getTitle();
-        this.userName = task.getUser().getName();
+
+        this.usersNames = task.getUsers().stream()
+            .map(user -> user.getName())
+            .collect(Collectors.toList());
+
         this.startDate = task.getStartDate();
         this.endDate = task.getEndDate();
     }

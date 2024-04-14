@@ -1,5 +1,7 @@
 package br.com.tarefas.gerenciador.dto.task;
 
+import java.util.List;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -10,8 +12,8 @@ public class CreateTaskDTO {
 
     protected String description;
 
-    @NotNull(message = "Field 'userId' is mandatory")
-    protected Long userId;
+    @NotNull(message = "Field 'usersIds' is mandatory")
+    protected List<Long> usersIds;
     
     @NotNull(message = "Field 'listId' is mandatory")
     protected Long listId;

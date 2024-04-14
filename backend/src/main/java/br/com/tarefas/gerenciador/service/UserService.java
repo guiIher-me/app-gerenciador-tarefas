@@ -1,5 +1,7 @@
 package br.com.tarefas.gerenciador.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +23,12 @@ public class UserService {
     @Autowired
     private PasswordEncoder encoder;
 
+    public List<User> getAllOrFail(List<Long> usersIds) {
+        List<User> users = userRepository.findAllByIdIn(usersIds);
+        users.forEach(user -> assertUser(user instanceof User));
+        return users;
+    }
+
     public User getOrFail(Long userId) {
         User user = userRepository.findById(userId).orElse(null);
         this.assertUser(user instanceof User);
@@ -28,7 +36,7 @@ public class UserService {
     }
 
     public void assertUser(boolean condition) throws ResourceNotFoundException {
-        if (!condition) throw new ResourceNotFoundException("User not found!");
+        if (!condition) throw new ResourceNotFoundException("User(s) not found!");
     }
 
     public UserRole getUserRole(RegisterUserDTO registerUser) throws HttpBadRequestException {

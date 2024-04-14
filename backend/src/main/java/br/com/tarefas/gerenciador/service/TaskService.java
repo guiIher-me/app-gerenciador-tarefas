@@ -2,6 +2,7 @@ package br.com.tarefas.gerenciador.service;
 
 import java.security.InvalidParameterException;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -42,7 +43,7 @@ public class TaskService {
     }
 
     public Task createTask(CreateTaskDTO createTaskDTO) {
-        User user = userService.getOrFail(createTaskDTO.getUserId());
+        List<User> users = userService.getAllOrFail(createTaskDTO.getUsersIds());
         TaskList taskList = taskListService.getOrFail(createTaskDTO.getListId());
 
         LocalDate start = null;
@@ -58,7 +59,7 @@ public class TaskService {
         Task task = new Task();
         task.setTitle(createTaskDTO.getTitle());
         task.setDescription(createTaskDTO.getDescription());
-        task.setUser(user);
+        task.setUsers(users);
         task.setTaskList(taskList);
         task.setStartDate(start);
         task.setEndDate(end);

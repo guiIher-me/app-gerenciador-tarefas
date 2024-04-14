@@ -1,5 +1,7 @@
 package br.com.tarefas.gerenciador.api.initializer;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -76,11 +78,10 @@ public class DevDataInitializer implements CommandLineRunner {
 
     @Transactional
     private void addCard(String title, String description, Long userId, Long taskListId, String startDate, String endDate) {
-        
         CreateTaskDTO createTaskList = new CreateTaskDTO();
         createTaskList.setTitle(title);
         createTaskList.setDescription(description);
-        createTaskList.setUserId(userId);
+        createTaskList.setUsersIds(Arrays.asList(userId));
         createTaskList.setListId(taskListId);
         createTaskList.setStartDate(startDate);
         createTaskList.setEndDate(endDate);
