@@ -6,17 +6,19 @@ import lombok.Data;
 @Data
 public class CreateTaskDTO {
     @NotNull(message = "Field 'title' is mandatory")
-    private String title;
+    protected String title;
 
-    private String description;
+    protected String description;
 
     @NotNull(message = "Field 'userId' is mandatory")
-    private Long userId;
+    protected Long userId;
     
     @NotNull(message = "Field 'listId' is mandatory")
-    private Long listId;
+    protected Long listId;
 
-    private String startDate;
+    protected String startDate;
 
-    private String endDate;
+    protected String endDate;
+
+    public CreateTaskDTO() { }
 }

@@ -48,7 +48,7 @@ public class DevDataInitializer implements CommandLineRunner {
         this.addList("Done");
 
         // Add Cards
-        this.addCard("Card 1", "desc card", (long) 2, (long) 1, "24/03/2015", "27/03/2015");
+        // this.addCard("Card 1", "desc card", (long) 2, (long) 1, "24/03/2015", "27/03/2015");
 
     }
 

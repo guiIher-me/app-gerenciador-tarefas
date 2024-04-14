@@ -11,17 +11,17 @@ import lombok.Data;
 
 @Data
 public class GetTaskDTO {
-    private Long id;
-    private String title;
-    private String description;
-    private SimpleUserDTO user;
-    private SimpleTaskListDTO list;
+    protected Long id;
+    protected String title;
+    protected String description;
+    protected SimpleUserDTO user;
+    protected SimpleTaskListDTO list;
     
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate startDate;
+    protected LocalDate startDate;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate endDate;
+    protected LocalDate endDate;
 
     public GetTaskDTO() { }
 
