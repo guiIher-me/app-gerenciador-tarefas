@@ -35,7 +35,6 @@ public class TaskService {
         if (start.isAfter(end)) throw new InvalidParameterException("Start date cannot be later than end date!");
     }
 
-    @SuppressWarnings("null")
     public Task getOrFail(Long taskId) {
         Task task = taskRepository.findById(taskId).orElse(null);
         this.assertTask(task instanceof Task);
@@ -77,7 +76,6 @@ public class TaskService {
         return updatedTask;
     }
 
-    @SuppressWarnings("null")
     public void deleteById(Long id) {
         Task task = getOrFail(id);
         this.taskRepository.delete(task);
