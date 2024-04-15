@@ -15,12 +15,14 @@ public class TaskListService {
     @Autowired
     private TaskListRepository taskListRepository;
 
+    @SuppressWarnings("null")
     public TaskList getOrFail(Long taskListId) {
         TaskList previousTaskList = taskListRepository.findById(taskListId).orElse(null);
         this.assertTaskList(previousTaskList instanceof TaskList);
         return previousTaskList;
     }
 
+    @SuppressWarnings("null")
     public TaskList getOrFail(Long taskListId, String failMessage) {
         TaskList previousTaskList = taskListRepository.findById(taskListId).orElse(null);
         this.assertTaskList(previousTaskList instanceof TaskList, failMessage);
@@ -73,6 +75,7 @@ public class TaskListService {
         return taskListRepository.save(taskList);
     }
 
+    @SuppressWarnings("null")
     public void deleteTaskListById(Long id) {
         TaskList taskList = getOrFail(id);
         taskListRepository.delete(taskList);

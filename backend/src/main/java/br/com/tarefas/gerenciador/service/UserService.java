@@ -29,6 +29,7 @@ public class UserService {
         return users;
     }
 
+    @SuppressWarnings("null")
     public User getOrFail(Long userId) {
         User user = userRepository.findById(userId).orElse(null);
         this.assertUser(user instanceof User);
@@ -63,6 +64,7 @@ public class UserService {
         return user;
     }
 
+    @SuppressWarnings("null")
     public User register(RegisterUserDTO registerUser) throws HttpBadRequestException {
         if (userRepository.existsByEmail(registerUser.getLogin()))
             throw new HttpBadRequestException("E-mail already exists!");
@@ -74,6 +76,7 @@ public class UserService {
         return savedUser;
     }
 
+    @SuppressWarnings("null")
     public User updateById(Long id, UpdateUserDTO user) throws HttpBadRequestException {
         User existingUser = getOrFail(id);
         User userWithEmail = userRepository.findByEmail(user.getEmail());
@@ -96,6 +99,7 @@ public class UserService {
         return updatedUser;
     }
 
+    @SuppressWarnings("null")
     public void deleteById(Long id) {
         User user = getOrFail(id);
         userRepository.delete(user);

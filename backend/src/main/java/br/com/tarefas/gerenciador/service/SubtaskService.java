@@ -39,6 +39,7 @@ public class SubtaskService {
         return savedSubtask;
     }
 
+    @SuppressWarnings("null")
     public Subtask getOrFail(Long subtaskId) {
         Subtask subtask = subtaskRepository.findById(subtaskId).orElse(null);
         this.assertSubtask(subtask instanceof Subtask);

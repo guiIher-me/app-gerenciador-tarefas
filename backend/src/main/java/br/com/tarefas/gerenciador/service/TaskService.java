@@ -37,6 +37,7 @@ public class TaskService {
     }
 
     public Task getOrFail(Long taskId) {
+        @SuppressWarnings("null")
         Task task = taskRepository.findById(taskId).orElse(null);
         this.assertTask(task instanceof Task);
         return task;
@@ -67,6 +68,7 @@ public class TaskService {
         return task;
     }
 
+    @SuppressWarnings("null")
     public Task createTask(CreateTaskDTO createTaskDTO) {
         Task task = getTaskByCreateDTO(createTaskDTO);
         Task savedTask = taskRepository.save(task);
@@ -82,6 +84,7 @@ public class TaskService {
         return updatedTask;
     }
 
+    @SuppressWarnings("null")
     public void deleteById(Long id) {
         Task task = getOrFail(id);
         this.taskRepository.delete(task);
