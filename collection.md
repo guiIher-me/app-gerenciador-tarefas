@@ -12,7 +12,7 @@
 ```json
 {
     "login": "test@test.com",
-    "password": "test1234"
+    "password": "test123"
 }
 ```
 
@@ -31,7 +31,7 @@
 
 ### Response: 401
 ```json
-null
+
 ```
 
 
@@ -61,7 +61,7 @@ null
 
 ### Response: 201
 ```json
-null
+
 ```
 
 ### Response: 400
@@ -220,7 +220,7 @@ null
 >```
 ### Response: 204
 ```json
-null
+
 ```
 
 ### Response: 404
@@ -396,7 +396,7 @@ null
 >```
 ### Response: 204
 ```json
-null
+
 ```
 
 ### Response: 404
@@ -421,9 +421,9 @@ null
 
 ```json
 {
-    "title": 10,
+    "title": "Task Title",
     "description": "creating task",
-    "userId": 1,
+    "usersIds": [1,2],
     "listId": 1,
     "startDate": "01/01/2024",
     "endDate": "30/12/2024"
@@ -433,19 +433,25 @@ null
 ### Response: 201
 ```json
 {
-    "id": 554,
-    "title": "Task Title",
+    "id": 52,
+    "title": "10",
     "description": "creating task",
-    "user": {
-        "id": 1,
-        "name": "Mr. Mock"
-    },
+    "users": [
+        {
+            "id": 1,
+            "name": "Mr. Mock"
+        },
+        {
+            "id": 2,
+            "name": "Testerson"
+        }
+    ],
     "list": {
         "id": 1,
         "title": "To Do"
     },
-    "startDate": "24/03/2024",
-    "endDate": "30/03/2024"
+    "startDate": "01/01/2024",
+    "endDate": "30/12/2024"
 }
 ```
 
@@ -453,7 +459,7 @@ null
 ```json
 {
     "status": 404,
-    "message": "User not found!"
+    "message": "User(s) not found!"
 }
 ```
 
@@ -478,6 +484,14 @@ null
 {
     "status": 422,
     "message": "Invalid date '32/12/2024'"
+}
+```
+
+### Response: 422
+```json
+{
+    "status": 422,
+    "message": "Start date cannot be later than end date!"
 }
 ```
 
@@ -569,7 +583,7 @@ null
 >```
 ### Response: 204
 ```json
-null
+
 ```
 
 ### Response: 404
@@ -577,6 +591,102 @@ null
 {
     "status": 404,
     "message": "Task not found!"
+}
+```
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+# 📁 Collection: subtask 
+
+
+## End-point: create
+### Method: POST
+>```
+>{{baseUrl}}/subtask/
+>```
+### Body (**raw**)
+
+```json
+{
+    "title": "Sub Subtask Title",
+    "description": "creating subtask",
+    "usersIds": [1,2],
+    "listId": 3,
+    "startDate": "01/01/2025",
+    "endDate": "30/12/2025",
+    "parentTaskId": 1
+}
+```
+
+### Response: 201
+```json
+{
+    "id": 52,
+    "title": "Sub Subtask Title",
+    "description": "creating subtask",
+    "users": [
+        {
+            "id": 1,
+            "name": "Mr. Mock"
+        },
+        {
+            "id": 2,
+            "name": "Testerson"
+        }
+    ],
+    "list": {
+        "id": 3,
+        "title": "Blocked"
+    },
+    "startDate": "01/01/2025",
+    "endDate": "30/12/2025",
+    "parentTaskId": 1
+}
+```
+
+### Response: 422
+```json
+{
+    "status": 422,
+    "message": "Parent ID must be a valid TASK!"
+}
+```
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: getById
+### Method: GET
+>```
+>{{baseUrl}}/subtask/:id
+>```
+### Response: 200
+```json
+{
+    "id": 2,
+    "title": "Sub Subtask Title",
+    "description": "creating subtask",
+    "users": [
+        {
+            "id": 2,
+            "name": "Testerson"
+        }
+    ],
+    "list": {
+        "id": 3,
+        "title": "Blocked"
+    },
+    "startDate": "01/01/2025",
+    "endDate": "30/12/2025",
+    "parentTaskId": 1
+}
+```
+
+### Response: 404
+```json
+{
+    "status": 404,
+    "message": "Subtask not found!"
 }
 ```
 

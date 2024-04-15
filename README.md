@@ -79,7 +79,7 @@ Diagrama de Classes UML gerado pela ferramenta [Visual Paradigm Online](https://
 <br>
 
 <p align="center">
-<img src="https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/diagrams/mvp1.1/diagrama_classes_uml_mvp1.1.png" width="600">
+<img src="https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/diagrams/mvp2.0/diagrama_classes_uml_mvp2.0.png" width="600">
 </p>
 
 
