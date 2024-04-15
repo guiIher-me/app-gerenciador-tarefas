@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import br.com.tarefas.gerenciador.dto.subtask.CreateSubtaskDTO;
 import br.com.tarefas.gerenciador.model.Subtask;
 import br.com.tarefas.gerenciador.model.Task;
-import br.com.tarefas.gerenciador.model.TaskType;
 import br.com.tarefas.gerenciador.repository.SubtaskRepository;
+import br.com.tarefas.gerenciador.util.TaskTypeConst;
 
 @Service
 public class SubtaskService {
@@ -29,7 +29,7 @@ public class SubtaskService {
         Task task = taskService.getTaskByCreateDTO(createSubtaskDTO);
         Task parent = taskService.getOrFail(createSubtaskDTO.getParentTaskId());
 
-        if (parent.getTaskType().equals(TaskType.SUBTASK))
+        if (parent.getTaskType().equals(TaskTypeConst.SUBTASK))
             throw new InvalidParameterException("Parent ID cannot be a subtask!");
 
         Subtask subtask = Subtask.createFromTask(task);

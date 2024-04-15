@@ -56,7 +56,12 @@ public class TaskListService {
 
     private TaskList createTaskListAtStart(CreateTaskListDTO createTasklist) {
         Double firstPosition = taskListRepository.findMinPosition();
-        TaskList taskList = new TaskList(createTasklist.getTitle(), firstPosition);
+        Double position = 1.0;
+
+        if (firstPosition != 0.0)
+            position = firstPosition / 2;
+
+        TaskList taskList = new TaskList(createTasklist.getTitle(), position);
         return taskListRepository.save(taskList);
     }
 

@@ -1,5 +1,6 @@
 package br.com.tarefas.gerenciador.model;
 
+import br.com.tarefas.gerenciador.util.TaskTypeConst;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -10,7 +11,7 @@ import jakarta.validation.Valid;
 
 @Entity
 @Table(name="subtasks")
-@DiscriminatorValue(TaskType.SUBTASK)
+@DiscriminatorValue(TaskTypeConst.SUBTASK)
 public class Subtask extends Task {
 
     @ManyToOne(cascade = CascadeType.ALL)

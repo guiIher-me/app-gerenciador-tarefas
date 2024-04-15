@@ -7,17 +7,17 @@ import lombok.Data;
 
 @Data
 public class RegisterUserDTO {
-    @NotNull(message = "Field 'name' is mandatory")
+    @NotNull(message = "{validation.name.mandatory}")
     String name;
 
     @Email(message = "{validation.email.format}")
-    @NotNull(message = "Field 'login' is mandatory")
+    @NotNull(message = "{validation.login.mandatory}")
     String login;
 
     @Size(min = 6, message = "{validation.password.length}")
-    @NotNull(message = "Field 'password' is mandatory")
+    @NotNull(message = "{validation.password.mandatory}")
     String password;
 
-    @NotNull(message = "Field 'role' is mandatory")
+    @NotNull(message = "{validation.role.mandatory}")
     String role;
 }

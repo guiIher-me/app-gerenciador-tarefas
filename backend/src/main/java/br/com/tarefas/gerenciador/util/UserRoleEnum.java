@@ -1,4 +1,4 @@
-package br.com.tarefas.gerenciador.model;
+package br.com.tarefas.gerenciador.util;
 
 public enum UserRoleEnum {
     ADMIN("admin"),

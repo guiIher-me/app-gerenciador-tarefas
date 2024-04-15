@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b4c88c8a-1da2-4f82-93ab-e53ac1c4bd1c",
+		"_postman_id": "b9d36488-330d-4723-9606-942a5904aac3",
 		"name": "Task Manager [UNESP]",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25687764"
+		"_exporter_id": "28225040"
 	},
 	"item": [
 		{
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"login\": \"test@test.com\",\r\n    \"password\": \"test123\"\r\n}",
+							"raw": "{\r\n    \"login\": \"mock@mock.com\",\r\n    \"password\": \"mock123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -235,6 +235,176 @@
 							],
 							"cookie": [],
 							"body": ""
+						},
+						{
+							"name": "[400] Invalid Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": \"testtest.com\",\r\n    \"password\": \"test123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Apr 2024 19:42:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"Invalid email format\"\n}"
+						},
+						{
+							"name": "[400] Mandatory field",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": \"test@test.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Apr 2024 19:43:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"Field 'password' is mandatory\"\n}"
 						}
 					]
 				},
@@ -2631,7 +2801,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -2858,7 +3028,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Sub Subtask Title\",\r\n    \"description\": \"creating subtask\",\r\n    \"usersIds\": [2],\r\n    \"listId\": 3,\r\n    \"startDate\": \"01/01/2025\",\r\n    \"endDate\": \"30/12/2025\",\r\n    \"parentTaskId\": 2\r\n}",
+									"raw": "{\r\n    \"title\": \"Sub Subtask Title\",\r\n    \"description\": \"creating subtask\",\r\n    \"usersIds\": [1,2],\r\n    \"listId\": 3,\r\n    \"startDate\": \"01/01/2025\",\r\n    \"endDate\": \"30/12/2025\",\r\n    \"parentTaskId\": 2\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2926,7 +3096,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 15 Apr 2024 16:44:37 GMT"
+									"value": "Mon, 15 Apr 2024 20:01:02 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -2938,7 +3108,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": 422,\n    \"message\": \"Parent ID must be a valid TASK!\"\n}"
+							"body": "{\n    \"status\": 422,\n    \"message\": \"Parent ID cannot be a subtask!\"\n}"
 						}
 					]
 				},

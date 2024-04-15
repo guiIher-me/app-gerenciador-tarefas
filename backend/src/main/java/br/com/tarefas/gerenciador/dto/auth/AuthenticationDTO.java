@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public class AuthenticationDTO {
     @Email(message = "{validation.email.format}")
-    @NotNull(message = "Field 'login' is mandatory")
+    @NotNull(message = "{validation.login.mandatory}")
     private String login;
 
-    @NotNull(message = "Field 'password' is mandatory")
-    private String password; 
+    @NotNull(message = "{validation.password.mandatory}")
+    private String password;
 }

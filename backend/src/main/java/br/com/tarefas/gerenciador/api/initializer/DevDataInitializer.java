@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 import br.com.tarefas.gerenciador.dto.task.CreateTaskDTO;
 import br.com.tarefas.gerenciador.dto.tasklist.CreateTaskListDTO;
 import br.com.tarefas.gerenciador.model.User;
-import br.com.tarefas.gerenciador.model.UserRoleEnum;
 import br.com.tarefas.gerenciador.repository.UserRepository;
 import br.com.tarefas.gerenciador.service.TaskListService;
 import br.com.tarefas.gerenciador.service.TaskService;
+import br.com.tarefas.gerenciador.util.UserRoleEnum;
 import jakarta.transaction.Transactional;
 import br.com.tarefas.gerenciador.repository.TaskListRepository;
 
@@ -43,15 +43,14 @@ public class DevDataInitializer implements CommandLineRunner {
         this.addUser("Testerson", "test@test.com", "test123", UserRoleEnum.USER);
 
         // Add Task Lists
-        this.addList("To Do");
-        this.addList("Development");
-        this.addList("Blocked");
-        this.addList("Testing");
-        this.addList("Done");
-
+        this.addList("To Do", null);
+        this.addList("Development", 1L);
+        this.addList("Blocked", 2L);
+        this.addList("Testing", 3L);
+        this.addList("Done", 4L);
+       
         // Add Cards
         // this.addCard("Card 1", "desc card", (long) 2, (long) 1, "24/03/2015", "27/03/2015");
-
     }
 
     @Transactional
@@ -68,10 +67,11 @@ public class DevDataInitializer implements CommandLineRunner {
     }
 
     @Transactional
-    private void addList(String title) {
+    private void addList(String title, Long previousListId) {
         if (!taskListRepository.existsByTitle(title)) {
             CreateTaskListDTO createtTaskList = new CreateTaskListDTO();
             createtTaskList.setTitle(title);
+            createtTaskList.setPreviousListId(previousListId);
             taskListService.createTaskList(createtTaskList);
         }
     }
