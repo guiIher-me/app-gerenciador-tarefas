@@ -57,11 +57,11 @@ public class User implements UserDetails {
             )    
     private List<Task> tasks;
 
-    private UserRole role;
+    private UserRoleEnum role;
 
     public User() { }
 
-    public User(String email, String encryptedPassword, UserRole role) {
+    public User(String email, String encryptedPassword, UserRoleEnum role) {
         this.email = email;
         this.password = encryptedPassword;
         this.role = role;
@@ -103,11 +103,11 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public UserRole getRole() {
+    public UserRoleEnum getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(UserRoleEnum role) {
         this.role = role;
     }
 
@@ -125,7 +125,7 @@ public class User implements UserDetails {
         SimpleGrantedAuthority ADMIN = new SimpleGrantedAuthority("ROLE_ADMIN"); 
         SimpleGrantedAuthority USER = new SimpleGrantedAuthority("ROLE_USER");
 
-        if (this.role == UserRole.ADMIN)
+        if (this.role == UserRoleEnum.ADMIN)
             return List.of(ADMIN, USER);
         
         return List.of(USER);

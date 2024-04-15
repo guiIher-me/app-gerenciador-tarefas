@@ -11,7 +11,7 @@ import br.com.tarefas.gerenciador.dto.auth.RegisterUserDTO;
 import br.com.tarefas.gerenciador.dto.user.UpdateUserDTO;
 import br.com.tarefas.gerenciador.exception.HttpBadRequestException;
 import br.com.tarefas.gerenciador.model.User;
-import br.com.tarefas.gerenciador.model.UserRole;
+import br.com.tarefas.gerenciador.model.UserRoleEnum;
 import br.com.tarefas.gerenciador.repository.UserRepository;
 
 @Service
@@ -39,10 +39,10 @@ public class UserService {
         if (!condition) throw new ResourceNotFoundException("User(s) not found!");
     }
 
-    public UserRole getUserRole(RegisterUserDTO registerUser) throws HttpBadRequestException {
+    public UserRoleEnum getUserRole(RegisterUserDTO registerUser) throws HttpBadRequestException {
         try {
             String userRole = registerUser.getRole();
-            return UserRole.valueOf(userRole);
+            return UserRoleEnum.valueOf(userRole);
         } catch(Exception e) {
             throw new HttpBadRequestException("Invalid Role value!");
         }
