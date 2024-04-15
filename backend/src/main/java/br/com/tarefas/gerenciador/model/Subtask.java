@@ -10,11 +10,11 @@ import jakarta.validation.Valid;
 
 @Entity
 @Table(name="subtasks")
-@DiscriminatorValue("Subtask")
+@DiscriminatorValue(TaskType.SUBTASK)
 public class Subtask extends Task {
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "task_id")
+    @JoinColumn(name = "parent_task_id")
     @Valid
     private Task parent;
     

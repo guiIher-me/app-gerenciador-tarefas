@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -20,20 +22,22 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="tasks")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "Task_Type")
-@DiscriminatorValue("Task")
+@DiscriminatorColumn(name = "task_type")
+@DiscriminatorValue(TaskType.TASK)
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
 
-    @NotBlank(message = "Field 'title' is mandatory")
+    @JsonProperty("task_type")
+    @Column(name = "task_type", insertable = false, updatable = false)
+    private String taskType;
+
     protected String title;
 
     protected String description;
@@ -76,6 +80,10 @@ public class Task {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTaskType() {
+        return taskType;
     }
 
     public String getTitle() {
