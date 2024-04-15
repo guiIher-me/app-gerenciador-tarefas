@@ -44,7 +44,7 @@ public class SubtaskController {
         return ResponseEntity.ok().body(subtaskDTO);
     }
 
-    @PutMapping(value="/{taskId}/move-to-list/{listId}", produces="application/json")
+    @PutMapping(value="/{subtaskId}/move-to-list/{listId}", produces="application/json")
     public ResponseEntity<GetSubtaskDTO> moveTaskToList(
         @NonNull @Validated @PathVariable Long subtaskId,
         @NonNull @Validated @PathVariable Long listId) {
