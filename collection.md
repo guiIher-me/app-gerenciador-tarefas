@@ -11,8 +11,8 @@
 
 ```json
 {
-    "login": "test@test.com",
-    "password": "test123"
+    "login": "mock@mock.com",
+    "password": "mock123"
 }
 ```
 
@@ -32,6 +32,22 @@
 ### Response: 401
 ```json
 
+```
+
+### Response: 400
+```json
+{
+    "status": 400,
+    "message": "Invalid email format"
+}
+```
+
+### Response: 400
+```json
+{
+    "status": 400,
+    "message": "Field 'password' is mandatory"
+}
 ```
 
 
@@ -648,7 +664,7 @@
 ```json
 {
     "status": 422,
-    "message": "Parent ID must be a valid TASK!"
+    "message": "Parent ID cannot be a subtask!"
 }
 ```
 
