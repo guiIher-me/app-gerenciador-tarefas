@@ -23,8 +23,10 @@ public class SubtaskService {
     }
 
     public Subtask createSubtask(CreateSubtaskDTO createSubtaskDTO) {
-        Subtask subtask = (Subtask) taskService.getTaskByCreateDTO(createSubtaskDTO);
+        Task task = taskService.getTaskByCreateDTO(createSubtaskDTO);
         Task parent = taskService.getOrFail(createSubtaskDTO.getParentTaskId());
+
+        Subtask subtask = Subtask.createFromTask(task);
         subtask.setParent(parent);
 
         Subtask savedSubtask = subtaskRepository.save(subtask);
@@ -37,6 +39,4 @@ public class SubtaskService {
         return subtask;
     }
 
-    
-    
 }
