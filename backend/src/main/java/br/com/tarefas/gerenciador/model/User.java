@@ -9,14 +9,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="users")
@@ -33,15 +36,32 @@ public class User implements UserDetails {
     @JsonIgnore
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable( name = "tasks_users", 
+                uniqueConstraints = @UniqueConstraint (
+                    columnNames = {"task_id","user_id"}, 
+                    name = "unique_user_task"
+                ), 
+	            joinColumns = @JoinColumn(name = "user_id", 
+                    referencedColumnName = "id", 
+                    table = "users", 
+                    unique = false
+                ),
+                inverseJoinColumns = @JoinColumn (
+                    name = "task_id", 
+                    referencedColumnName = "id", 
+                    table = "tasks", 
+                    unique = false
+                )
+            )    
     private List<Task> tasks;
 
-    private UserRole role;
+    private UserRoleEnum role;
 
     public User() { }
 
-    public User(String email, String encryptedPassword, UserRole role) {
+    public User(String email, String encryptedPassword, UserRoleEnum role) {
         this.email = email;
         this.password = encryptedPassword;
         this.role = role;
@@ -83,11 +103,11 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public UserRole getRole() {
+    public UserRoleEnum getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(UserRoleEnum role) {
         this.role = role;
     }
 
@@ -105,7 +125,7 @@ public class User implements UserDetails {
         SimpleGrantedAuthority ADMIN = new SimpleGrantedAuthority("ROLE_ADMIN"); 
         SimpleGrantedAuthority USER = new SimpleGrantedAuthority("ROLE_USER");
 
-        if (this.role == UserRole.ADMIN)
+        if (this.role == UserRoleEnum.ADMIN)
             return List.of(ADMIN, USER);
         
         return List.of(USER);

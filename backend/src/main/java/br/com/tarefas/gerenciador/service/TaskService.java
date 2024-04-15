@@ -2,6 +2,7 @@ package br.com.tarefas.gerenciador.service;
 
 import java.security.InvalidParameterException;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -35,15 +36,15 @@ public class TaskService {
         if (start.isAfter(end)) throw new InvalidParameterException("Start date cannot be later than end date!");
     }
 
-    @SuppressWarnings("null")
     public Task getOrFail(Long taskId) {
+        @SuppressWarnings("null")
         Task task = taskRepository.findById(taskId).orElse(null);
         this.assertTask(task instanceof Task);
         return task;
     }
 
-    public Task createTask(CreateTaskDTO createTaskDTO) {
-        User user = userService.getOrFail(createTaskDTO.getUserId());
+    public Task getTaskByCreateDTO(CreateTaskDTO createTaskDTO) {
+        List<User> users = userService.getAllOrFail(createTaskDTO.getUsersIds());
         TaskList taskList = taskListService.getOrFail(createTaskDTO.getListId());
 
         LocalDate start = null;
@@ -59,11 +60,17 @@ public class TaskService {
         Task task = new Task();
         task.setTitle(createTaskDTO.getTitle());
         task.setDescription(createTaskDTO.getDescription());
-        task.setUser(user);
+        task.setUsers(users);
         task.setTaskList(taskList);
         task.setStartDate(start);
         task.setEndDate(end);
-        
+
+        return task;
+    }
+
+    @SuppressWarnings("null")
+    public Task createTask(CreateTaskDTO createTaskDTO) {
+        Task task = getTaskByCreateDTO(createTaskDTO);
         Task savedTask = taskRepository.save(task);
         return savedTask;
     }

@@ -1,12 +1,12 @@
 package br.com.tarefas.gerenciador.model;
 
-public enum UserRole {
+public enum UserRoleEnum {
     ADMIN("admin"),
     USER("user");
 
     private String role;
 
-    UserRole(String role){
+    UserRoleEnum(String role){
         this.role = role;
     }
 

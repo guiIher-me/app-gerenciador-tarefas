@@ -1,5 +1,7 @@
 package br.com.tarefas.gerenciador.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,7 +11,7 @@ import br.com.tarefas.gerenciador.dto.auth.RegisterUserDTO;
 import br.com.tarefas.gerenciador.dto.user.UpdateUserDTO;
 import br.com.tarefas.gerenciador.exception.HttpBadRequestException;
 import br.com.tarefas.gerenciador.model.User;
-import br.com.tarefas.gerenciador.model.UserRole;
+import br.com.tarefas.gerenciador.model.UserRoleEnum;
 import br.com.tarefas.gerenciador.repository.UserRepository;
 
 @Service
@@ -21,6 +23,12 @@ public class UserService {
     @Autowired
     private PasswordEncoder encoder;
 
+    public List<User> getAllOrFail(List<Long> usersIds) {
+        List<User> users = userRepository.findAllByIdIn(usersIds);
+        assertUser(usersIds.size() == users.size());
+        return users;
+    }
+
     @SuppressWarnings("null")
     public User getOrFail(Long userId) {
         User user = userRepository.findById(userId).orElse(null);
@@ -29,13 +37,13 @@ public class UserService {
     }
 
     public void assertUser(boolean condition) throws ResourceNotFoundException {
-        if (!condition) throw new ResourceNotFoundException("User not found!");
+        if (!condition) throw new ResourceNotFoundException("User(s) not found!");
     }
 
-    public UserRole getUserRole(RegisterUserDTO registerUser) throws HttpBadRequestException {
+    public UserRoleEnum getUserRole(RegisterUserDTO registerUser) throws HttpBadRequestException {
         try {
             String userRole = registerUser.getRole();
-            return UserRole.valueOf(userRole);
+            return UserRoleEnum.valueOf(userRole);
         } catch(Exception e) {
             throw new HttpBadRequestException("Invalid Role value!");
         }

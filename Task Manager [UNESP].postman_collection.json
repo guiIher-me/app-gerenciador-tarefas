@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "cc85e8a2-98c4-480b-bba5-8a677f4fe5c9",
+		"_postman_id": "b4c88c8a-1da2-4f82-93ab-e53ac1c4bd1c",
 		"name": "Task Manager [UNESP]",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28225040"
+		"_exporter_id": "25687764"
 	},
 	"item": [
 		{
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"login\": \"test@test.com\",\r\n    \"password\": \"test1234\"\r\n}",
+							"raw": "{\r\n    \"login\": \"test@test.com\",\r\n    \"password\": \"test123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -234,7 +234,7 @@
 								}
 							],
 							"cookie": [],
-							"body": null
+							"body": ""
 						}
 					]
 				},
@@ -350,7 +350,7 @@
 								}
 							],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "[400] Email Exists",
@@ -1173,7 +1173,7 @@
 								}
 							],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "[404] Not Found",
@@ -1813,7 +1813,7 @@
 								}
 							],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "[404] Not Found",
@@ -1879,7 +1879,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": 10,\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 1,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
+							"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"usersIds\": [1,2],\r\n    \"listId\": 1,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1905,7 +1905,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 1,\r\n    \"startDate\": \"24/03/2024\",\r\n    \"endDate\": \"30/03/2024\"\r\n}",
+									"raw": "{\r\n    \"title\": 10,\r\n    \"description\": \"creating task\",\r\n    \"usersIds\": [1,2],\r\n    \"listId\": 1,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1928,6 +1928,42 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json"
 								},
@@ -1937,7 +1973,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sun, 24 Mar 2024 16:57:04 GMT"
+									"value": "Sun, 14 Apr 2024 19:57:00 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -1949,7 +1985,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 554,\n    \"title\": \"Task Title\",\n    \"description\": \"creating task\",\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"Mr. Mock\"\n    },\n    \"list\": {\n        \"id\": 1,\n        \"title\": \"To Do\"\n    },\n    \"startDate\": \"24/03/2024\",\n    \"endDate\": \"30/03/2024\"\n}"
+							"body": "{\n    \"id\": 52,\n    \"title\": \"10\",\n    \"description\": \"creating task\",\n    \"users\": [\n        {\n            \"id\": 1,\n            \"name\": \"Mr. Mock\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Testerson\"\n        }\n    ],\n    \"list\": {\n        \"id\": 1,\n        \"title\": \"To Do\"\n    },\n    \"startDate\": \"01/01/2024\",\n    \"endDate\": \"30/12/2024\"\n}"
 						},
 						{
 							"name": "[404] User Not Found",
@@ -1958,7 +1994,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 10,\r\n    \"listId\": 1,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
+									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"usersIds\": [1,10],\r\n    \"listId\": 1,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2002,7 +2038,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": 404,\n    \"message\": \"User not found!\"\n}"
+							"body": "{\n    \"status\": 404,\n    \"message\": \"User(s) not found!\"\n}"
 						},
 						{
 							"name": "[404] List Not Found",
@@ -2011,7 +2047,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 10,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
+									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"usersIds\": [1],\r\n    \"listId\": 10,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2064,7 +2100,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 1,\r\n    \"startDate\": \"00/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
+									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"usersIds\": [1],\r\n    \"listId\": 1,\r\n    \"startDate\": \"00/01/2024\",\r\n    \"endDate\": \"30/12/2024\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2117,7 +2153,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"userId\": 1,\r\n    \"listId\": 1,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"32/12/2024\"\r\n}",
+									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"usersIds\": [1],\r\n    \"listId\": 1,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"32/12/2024\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2162,6 +2198,95 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status\": 422,\n    \"message\": \"Invalid date '32/12/2024'\"\n}"
+						},
+						{
+							"name": "[422] Invalid Dates",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Task Title\",\r\n    \"description\": \"creating task\",\r\n    \"usersIds\": [1,2],\r\n    \"listId\": 1,\r\n    \"startDate\": \"01/01/2024\",\r\n    \"endDate\": \"30/12/2023\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/task/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"task",
+										""
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Apr 2024 02:46:32 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 422,\n    \"message\": \"Start date cannot be later than end date!\"\n}"
 						}
 					]
 				},
@@ -2182,7 +2307,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -2552,7 +2677,7 @@
 								}
 							],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "[404] Not Found",
@@ -2603,6 +2728,414 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status\": 404,\n    \"message\": \"Task not found!\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "subtask",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Sub Subtask Title\",\r\n    \"description\": \"creating subtask\",\r\n    \"usersIds\": [1,2],\r\n    \"listId\": 3,\r\n    \"startDate\": \"01/01/2025\",\r\n    \"endDate\": \"30/12/2025\",\r\n    \"parentTaskId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/subtask/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subtask",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "[201] Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Sub Subtask Title\",\r\n    \"description\": \"creating subtask\",\r\n    \"usersIds\": [1,2],\r\n    \"listId\": 3,\r\n    \"startDate\": \"01/01/2025\",\r\n    \"endDate\": \"30/12/2025\",\r\n    \"parentTaskId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/subtask/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"subtask",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Apr 2024 16:45:08 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 52,\n    \"title\": \"Sub Subtask Title\",\n    \"description\": \"creating subtask\",\n    \"users\": [\n        {\n            \"id\": 1,\n            \"name\": \"Mr. Mock\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Testerson\"\n        }\n    ],\n    \"list\": {\n        \"id\": 3,\n        \"title\": \"Blocked\"\n    },\n    \"startDate\": \"01/01/2025\",\n    \"endDate\": \"30/12/2025\",\n    \"parentTaskId\": 1\n}"
+						},
+						{
+							"name": "[422] Invalid Parent ID",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Sub Subtask Title\",\r\n    \"description\": \"creating subtask\",\r\n    \"usersIds\": [2],\r\n    \"listId\": 3,\r\n    \"startDate\": \"01/01/2025\",\r\n    \"endDate\": \"30/12/2025\",\r\n    \"parentTaskId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/subtask/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"subtask",
+										""
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Apr 2024 16:44:37 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 422,\n    \"message\": \"Parent ID must be a valid TASK!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/subtask/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subtask",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "[200]  Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/subtask/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"subtask",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Apr 2024 16:44:20 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"title\": \"Sub Subtask Title\",\n    \"description\": \"creating subtask\",\n    \"users\": [\n        {\n            \"id\": 2,\n            \"name\": \"Testerson\"\n        }\n    ],\n    \"list\": {\n        \"id\": 3,\n        \"title\": \"Blocked\"\n    },\n    \"startDate\": \"01/01/2025\",\n    \"endDate\": \"30/12/2025\",\n    \"parentTaskId\": 1\n}"
+						},
+						{
+							"name": "[404] Not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/subtask/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"subtask",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Apr 2024 16:47:07 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 404,\n    \"message\": \"Subtask not found!\"\n}"
 						}
 					]
 				}
