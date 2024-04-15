@@ -31,8 +31,8 @@ public class SubtaskController {
     private TaskService taskService;
 
     @PostMapping(value="/", produces="application/json")
-    public ResponseEntity<GetSubtaskDTO> create(@NonNull @Validated @RequestBody CreateSubtaskDTO createTaskDTO) {
-        Subtask savedSubtask = subtaskService.createSubtask(createTaskDTO);
+    public ResponseEntity<GetSubtaskDTO> create(@NonNull @Validated @RequestBody CreateSubtaskDTO createSubtaskDTO) {
+        Subtask savedSubtask = subtaskService.createSubtask(createSubtaskDTO);
         GetSubtaskDTO subtaskDTO = new GetSubtaskDTO(savedSubtask);
         return ResponseEntity.status(HttpStatus.CREATED).body(subtaskDTO);
     }
