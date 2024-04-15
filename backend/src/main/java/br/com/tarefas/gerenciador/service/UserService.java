@@ -25,7 +25,7 @@ public class UserService {
 
     public List<User> getAllOrFail(List<Long> usersIds) {
         List<User> users = userRepository.findAllByIdIn(usersIds);
-        users.forEach(user -> assertUser(user instanceof User));
+        assertUser(usersIds.size() == users.size());
         return users;
     }
 

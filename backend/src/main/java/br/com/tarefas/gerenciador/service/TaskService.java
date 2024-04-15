@@ -42,7 +42,7 @@ public class TaskService {
         return task;
     }
 
-    public Task createTask(CreateTaskDTO createTaskDTO) {
+    public Task getTaskByCreateDTO(CreateTaskDTO createTaskDTO) {
         List<User> users = userService.getAllOrFail(createTaskDTO.getUsersIds());
         TaskList taskList = taskListService.getOrFail(createTaskDTO.getListId());
 
@@ -63,7 +63,12 @@ public class TaskService {
         task.setTaskList(taskList);
         task.setStartDate(start);
         task.setEndDate(end);
-        
+
+        return task;
+    }
+
+    public Task createTask(CreateTaskDTO createTaskDTO) {
+        Task task = getTaskByCreateDTO(createTaskDTO);
         Task savedTask = taskRepository.save(task);
         return savedTask;
     }
