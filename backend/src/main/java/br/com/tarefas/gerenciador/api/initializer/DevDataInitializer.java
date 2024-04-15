@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import br.com.tarefas.gerenciador.dto.task.CreateTaskDTO;
 import br.com.tarefas.gerenciador.dto.tasklist.CreateTaskListDTO;
 import br.com.tarefas.gerenciador.model.User;
-import br.com.tarefas.gerenciador.model.UserRole;
+import br.com.tarefas.gerenciador.model.UserRoleEnum;
 import br.com.tarefas.gerenciador.repository.UserRepository;
 import br.com.tarefas.gerenciador.service.TaskListService;
 import br.com.tarefas.gerenciador.service.TaskService;
@@ -39,8 +39,8 @@ public class DevDataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // Add users
-        this.addUser("Mr. Mock", "mock@mock.com", "mock123", UserRole.ADMIN);
-        this.addUser("Testerson", "test@test.com", "test123", UserRole.USER);
+        this.addUser("Mr. Mock", "mock@mock.com", "mock123", UserRoleEnum.ADMIN);
+        this.addUser("Testerson", "test@test.com", "test123", UserRoleEnum.USER);
 
         // Add Task Lists
         this.addList("To Do");
@@ -55,7 +55,7 @@ public class DevDataInitializer implements CommandLineRunner {
     }
 
     @Transactional
-    private void addUser(String name, String email, String password, UserRole role) {
+    private void addUser(String name, String email, String password, UserRoleEnum role) {
         if (!userRepository.existsByEmail(email)) {
             User user = new User();
             user.setName(name);
