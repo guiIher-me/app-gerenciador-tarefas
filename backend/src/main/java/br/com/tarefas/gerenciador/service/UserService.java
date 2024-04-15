@@ -11,8 +11,8 @@ import br.com.tarefas.gerenciador.dto.auth.RegisterUserDTO;
 import br.com.tarefas.gerenciador.dto.user.UpdateUserDTO;
 import br.com.tarefas.gerenciador.exception.HttpBadRequestException;
 import br.com.tarefas.gerenciador.model.User;
-import br.com.tarefas.gerenciador.model.UserRoleEnum;
 import br.com.tarefas.gerenciador.repository.UserRepository;
+import br.com.tarefas.gerenciador.util.UserRoleEnum;
 
 @Service
 public class UserService {

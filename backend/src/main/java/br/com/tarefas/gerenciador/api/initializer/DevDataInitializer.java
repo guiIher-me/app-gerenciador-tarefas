@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 import br.com.tarefas.gerenciador.dto.task.CreateTaskDTO;
 import br.com.tarefas.gerenciador.dto.tasklist.CreateTaskListDTO;
 import br.com.tarefas.gerenciador.model.User;
-import br.com.tarefas.gerenciador.model.UserRoleEnum;
 import br.com.tarefas.gerenciador.repository.UserRepository;
 import br.com.tarefas.gerenciador.service.TaskListService;
 import br.com.tarefas.gerenciador.service.TaskService;
+import br.com.tarefas.gerenciador.util.UserRoleEnum;
 import jakarta.transaction.Transactional;
 import br.com.tarefas.gerenciador.repository.TaskListRepository;
 

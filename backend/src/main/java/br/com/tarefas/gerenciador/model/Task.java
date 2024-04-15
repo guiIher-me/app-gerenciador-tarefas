@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.tarefas.gerenciador.util.TaskTypeConst;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorValue;
@@ -28,7 +29,7 @@ import jakarta.persistence.UniqueConstraint;
 @Table(name="tasks")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "task_type")
-@DiscriminatorValue(TaskType.TASK)
+@DiscriminatorValue(TaskTypeConst.TASK)
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
