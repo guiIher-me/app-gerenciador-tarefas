@@ -5,7 +5,8 @@ import lombok.Data;
 
 @Data
 public class CreateTaskListDTO {
-    @NotNull(message = "Field 'title' is mandatory")
+    @NotNull(message = "{validation.title.mandatory}")
     private String title;
+    
     private Long previousListId;
 }

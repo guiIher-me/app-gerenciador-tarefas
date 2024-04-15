@@ -8,6 +8,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class CreateSubtaskDTO extends CreateTaskDTO {
-    @NotNull(message = "Field 'parentTaskId' is mandatory")
+    @NotNull(message = "{validation.parentTaskId.mandatory}")
     private Long parentTaskId;
 }

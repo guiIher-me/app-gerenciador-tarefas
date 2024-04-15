@@ -25,10 +25,10 @@ public class TaskList implements Sortable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Field 'title' is mandatory")
+    @NotBlank(message = "{validation.title.mandatory}")
     private String title;
 
-    @NotNull(message = "Field 'position' is mandatory")
+    @NotNull(message = "{validation.position.mandatory}")
     private Double position;
 
     @OneToMany(mappedBy = "taskList", cascade = CascadeType.ALL)
