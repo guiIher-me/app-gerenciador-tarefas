@@ -41,7 +41,7 @@ estágios de conclusão.
 ## 🚀 Como Executar
 
 No diretório raiz do projeto, execute o terminal linux e siga o passo-a-passo abaixo:
- 1. No arquivo **application.properties**, modifique a propriedade *spring.datasource.url* para: `spring.datasource.url=jdbc:postgresql://localhost:5432/task_manager`
+ 1. No arquivo **application.properties**, modifique a propriedade *spring.datasource.url* para `spring.datasource.url=jdbc:postgresql://localhost:5432/task_manager` e remova `server.servlet.context-path=/v1`;
  2. Execute o comando `cd backend`  para ir para o diretório raiz do backend;
  3. Execute o comando `mvnw spring-boot:run` para inicializar o projeto;
  4. Enjoy!
