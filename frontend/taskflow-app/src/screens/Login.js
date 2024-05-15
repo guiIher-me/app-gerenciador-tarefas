@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Adapter, { post, get } from '../adapters/OrdinaryAdapter';
 import Config from '../config.json';
-import Registrar from './Register.js';
-import '../styles/Login.css';
-import {TextField, Button, Card, CardContent, CardActions, GlobalStyles, createTheme, ThemeProvider } from '@mui/material/';
+//import Registrar from './Register.js';
+import {TextField, Button, Card, CardContent, CardActions, CardMedia } from '@mui/material/';
 import { styled } from '@mui/system';
 
 const RoundedTextField = styled(TextField)({
@@ -12,12 +11,10 @@ const RoundedTextField = styled(TextField)({
   }
 
 });
-
 const RoundedCard = styled(Card)({
-  '.MuiCard-root':{
-    backgroundColor: "#ffbd59"
-  }
-})
+    backgroundColor: "#eeece1",
+    borderRadius: '20px'
+});
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -45,10 +42,18 @@ export default function Login() {
   return (
     <div>       
           
-        <div className="row">      
-            <RoundedCard id="cardLogin" className="col-md-4">
+        <div className="col-md-12">      
+            <RoundedCard id="cardLogin" className="col-md-4 mx-auto my-5" >
+            <CardMedia
+              component="img"
+              className="mx-auto my-2"
+              alt="logo taskflow"
+              image="/logo2_taskflow.png"
+              sx={{ height: 137, width: 154 }}
+            />
+              {/* <img src="/logo_taskflow.png"></img> */}
               <CardContent>
-                <label>Login</label>
+                {/* <label>Login</label> */}
                 {errorMessage && <p>{errorMessage}</p>}         
                               
                   <form id="formLogin" onSubmit={handleSubmit}>
