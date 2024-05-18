@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import Adapter, { post, get } from '../adapters/OrdinaryAdapter';
+import Adapter, { post } from '../adapters/OrdinaryAdapter';
 import Config from '../config.json';
-import Register from './Register.js';
+import { useNavigate } from 'react-router-dom';
 import {TextField, Button, Card, CardContent, CardActions, CardMedia, Typography, colors } from '@mui/material/';
 import { styled } from '@mui/system';
+import { Navigate, Router } from "react-router-dom";
 
 
 const RoundedTextField = styled(TextField)({
@@ -39,6 +40,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,9 +54,11 @@ export default function Login() {
       const response = await post(Config.apiURL+'auth/login', requestBody)
       const { token } = response.data;
       localStorage.setItem("token", token);
-
+      navigate('/tasks');
+      
     } catch (error) {
       setErrorMessage("Email ou senha inválidos");
+      console.log('erro erro');
     }
   };
 
@@ -62,7 +66,7 @@ export default function Login() {
     <div>       
           
         <div className="row">      
-            <RoundedCard id="cardLogin" className="col-md-4 mx-auto my-5" >
+            <RoundedCard id="cardLogin" className="col-md-4 mx-auto my-5">
             <CardMedia
               component="img"
               className="mx-auto my-2"
@@ -70,9 +74,7 @@ export default function Login() {
               image="/logo2_taskflow.png"
               sx={{ height: 137, width: 154 }}
             />
-              {/* <img src="/logo_taskflow.png"></img> */}
               <CardContent>
-                {/* <label>Login</label> */}
                 {errorMessage && <p>{errorMessage}</p>}         
                               
                   <form id="formLogin" onSubmit={handleSubmit}>
@@ -99,29 +101,28 @@ export default function Login() {
                         />                  
 
                       </div>
+                    <div id="divBtnLogin" className="d-flex justify-content-center">
+                      <Button 
+                      id="btnLogin" 
+                      className="col-3" 
+                      type="submit" 
+                      variant="contained"
+                      sx={{color: 'black',
+                          backgroundColor: '#002364',
+                          margin:'10px', 
+                      '&:hover': {
+                        backgroundColor: '#00bf63', // Cor de fundo ao passar o mouse
+                      },
+                      }}>
+                        Login</Button>            
+                    </div>
                   </form>
 
               </CardContent>
 
               <CardActions>
 
-              <div className="row">
-                <div id="divBtnLogin" className="d-flex justify-content-center">
-                  <Button 
-                  id="btnLogin" 
-                  className="col-3" 
-                  type="submit" 
-                  variant="contained"
-                  sx={{color: 'black',
-                      backgroundColor: '#00bf63', // Cor de fundo
-                  '&:hover': {
-                    backgroundColor: '#002364', // Cor de fundo ao passar o mouse
-                  },
-                  }}>
-                    Login</Button>            
-                </div>
-
-                <div id="divRegistrar" className="d-flex justify-content-center">                  
+                <div id="divRegistrar" className="col-12 d-flex justify-content-center">                  
                   {/* <label >Ainda não tem conta? </label>  */}
                   <Typography color={'black'} margin={'6px'}>Ainda não tem conta?</Typography>
                   <Button 
@@ -132,7 +133,6 @@ export default function Login() {
                   }}>
                     Registre-se</Button>
                 </div>
-              </div>
            
               </CardActions>
             </RoundedCard>
