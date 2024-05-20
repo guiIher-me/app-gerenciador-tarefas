@@ -7,7 +7,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Login from './screens/Login.js'
 import Register from './screens/Register.js'
-import Tasks from './screens/Tasks.js';
+import Home from './screens/Home.js';
 import { CssBaseline } from '@mui/material';
 
 const router = createBrowserRouter([
@@ -24,8 +24,8 @@ const router = createBrowserRouter([
     element: <Register/>
   },
   {
-    path:'/tasks',
-    element: <Tasks/>
+    path:'/Home',
+    element: <Home/>
   }
 
 ]);

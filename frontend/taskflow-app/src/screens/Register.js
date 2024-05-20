@@ -21,16 +21,17 @@ const RoundedTextField = styled(TextField)({
       borderColor: '#f44336', // Cor da borda quando há um erro
     },
   },
-    '& .MuiInputLabel-root': {
-      '&.Mui-focused': {
-        color: '#ffbd59', // Cor do rótulo quando focado
-      },
-      '&.Mui-error': {
-        color: '#f44336', // Cor do rótulo quando há um erro
-      },
+  '& .MuiInputLabel-root': {
+    '&.Mui-focused': {
+      color: '#ffbd59', // Cor do rótulo quando focado
+    },
+    '&.Mui-error': {
+      color: '#f44336', // Cor do rótulo quando há um erro
+    },
   },
 
 });
+
 const RoundedCard = styled(Card)({
     backgroundColor: "#eeece1",
     borderRadius: '20px'
@@ -47,7 +48,6 @@ export default function Register() {
     e.preventDefault();
 
     const requestBody = {
-
         "name": name,
         "login": email,
         "password": password,
@@ -82,6 +82,7 @@ export default function Register() {
                               
                   <form id="formLogin" onSubmit={handleSubmit}>
                     <div className="form-group">
+
                         <RoundedTextField 
                           id="tfName" 
                           label="Nome Completo" 
@@ -91,6 +92,7 @@ export default function Register() {
                           onChange={(e) => setName(e.target.value)}
                           required 
                         />
+
                         <RoundedTextField 
                           id="tfEmail" 
                           label="Email" 
@@ -112,7 +114,7 @@ export default function Register() {
                           required
                         />                  
 
-                      </div>
+                    </div>
                     <div id="divBtnRegister" className="d-flex justify-content-center">
                       <Button 
                       id="btnRegister" 
@@ -129,7 +131,6 @@ export default function Register() {
                         Registrar-me</Button>            
                     </div>
                   </form>
-
               </CardContent>
             </RoundedCard>
           </div>

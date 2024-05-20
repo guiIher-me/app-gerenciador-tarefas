@@ -38,6 +38,5 @@ public class SubtaskController {
         Subtask subtask = subtaskService.getOrFail(id);
         GetSubtaskDTO subtaskDTO = new GetSubtaskDTO(subtask);
         return ResponseEntity.ok().body(subtaskDTO);
-    }
-    
+    }    
 }

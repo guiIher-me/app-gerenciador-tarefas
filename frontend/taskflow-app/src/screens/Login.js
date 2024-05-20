@@ -58,7 +58,7 @@ export default function Login() {
       
     } catch (error) {
       setErrorMessage("Email ou senha inválidos");
-      console.log('erro erro');
+      //console.log('erro erro');
     }
   };
 
@@ -67,13 +67,13 @@ export default function Login() {
           
         <div className="row">      
             <RoundedCard id="cardLogin" className="col-md-4 mx-auto my-5">
-            <CardMedia
-              component="img"
-              className="mx-auto my-2"
-              alt="logo taskflow"
-              image="/logo2_taskflow.png"
-              sx={{ height: 137, width: 154 }}
-            />
+              <CardMedia
+                component="img"
+                className="mx-auto my-2"
+                alt="logo taskflow"
+                image="/logo2_taskflow.png"
+                sx={{ height: 137, width: 154 }}
+              />
               <CardContent>
                 {errorMessage && <p>{errorMessage}</p>}         
                               
@@ -100,7 +100,7 @@ export default function Login() {
                           required
                         />                  
 
-                      </div>
+                    </div>
                     <div id="divBtnLogin" className="d-flex justify-content-center">
                       <Button 
                       id="btnLogin" 
@@ -123,14 +123,13 @@ export default function Login() {
               <CardActions>
 
                 <div id="divRegistrar" className="col-12 d-flex justify-content-center">                  
-                  {/* <label >Ainda não tem conta? </label>  */}
                   <Typography color={'black'} margin={'6px'}>Ainda não tem conta?</Typography>
                   <Button 
                     id="btnRegistrar" 
                     variant="text"
                     href="/auth/register"
                     sx={{color: '#002364'
-                  }}>
+                    }}>
                     Registre-se</Button>
                 </div>
            
