@@ -22,7 +22,7 @@ import br.com.tarefas.gerenciador.security.TokenService;
 import br.com.tarefas.gerenciador.service.UserService;
 import jakarta.validation.Valid;
 
-@CrossOrigin()
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {

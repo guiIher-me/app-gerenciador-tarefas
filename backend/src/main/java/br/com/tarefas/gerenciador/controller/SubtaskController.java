@@ -18,7 +18,7 @@ import br.com.tarefas.gerenciador.dto.subtask.GetSubtaskDTO;
 import br.com.tarefas.gerenciador.model.Subtask;
 import br.com.tarefas.gerenciador.service.SubtaskService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 @RestController
 @RequestMapping("/subtask")
 public class SubtaskController {

@@ -21,7 +21,7 @@ import br.com.tarefas.gerenciador.model.User;
 import br.com.tarefas.gerenciador.repository.UserRepository;
 import br.com.tarefas.gerenciador.service.UserService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 @RestController
 @RequestMapping(value="/user")
 public class UserController {

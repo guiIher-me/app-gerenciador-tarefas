@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import {TextField, Button, Card, CardContent, CardMedia} from '@mui/material/';
 import { styled } from '@mui/system';
 
-
 const RoundedTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
     borderRadius: '20px',

@@ -20,7 +20,7 @@ import br.com.tarefas.gerenciador.dto.task.GetTaskDTO;
 import br.com.tarefas.gerenciador.model.Task;
 import br.com.tarefas.gerenciador.service.TaskService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 @RestController
 @RequestMapping("/task")
 public class TaskController {

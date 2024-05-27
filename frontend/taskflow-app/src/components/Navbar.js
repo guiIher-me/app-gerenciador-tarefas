@@ -22,11 +22,11 @@ const boards = ['**', '***'];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [selectedBoard, setSelectedBoard] = useState('');
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+  
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -37,10 +37,6 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  };
-
-  const handleChange = (event) => {
-    setSelectedBoard(event.target.value);
   };
 
   return (
@@ -65,26 +61,6 @@ function ResponsiveAppBar() {
           >
             TASKFLOW
           </Typography>
-          
-          <Box className="ml-3">
-            <FormControl variant="outlined" size="small" className="mr-3">
-              <InputLabel id="select-label">Quadros</InputLabel>
-              <Select
-                labelId="select-label"
-                id="select-board"
-                value={selectedBoard}
-                onChange={handleChange}
-                label="Quadros"
-                style={{ minWidth: 120}}
-              >
-                {boards.map((board, index) => (
-                  <MenuItem key={index} value={board}>
-                    {board}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton

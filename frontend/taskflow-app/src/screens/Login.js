@@ -29,8 +29,8 @@ const RoundedTextField = styled(TextField)({
         color: '#f44336', // Cor do rótulo quando há um erro
       },
   },
-
 });
+
 const RoundedCard = styled(Card)({
     backgroundColor: "#eeece1",
     borderRadius: '20px'
@@ -54,7 +54,7 @@ export default function Login() {
       const response = await post(Config.apiURL+'auth/login', requestBody)
       const { token } = response.data;
       localStorage.setItem("token", token);
-      navigate('/tasks');
+      navigate('/Home');
       
     } catch (error) {
       setErrorMessage("Email ou senha inválidos");

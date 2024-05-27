@@ -24,7 +24,7 @@ import br.com.tarefas.gerenciador.repository.TaskListRepository;
 import br.com.tarefas.gerenciador.service.TaskListService;
 import jakarta.validation.constraints.NotBlank;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 @RestController
 @RequestMapping(value="/list")
 public class TaskListController {
