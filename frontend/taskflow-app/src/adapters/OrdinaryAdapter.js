@@ -23,8 +23,21 @@ export function get(url){
     return Axios.get(url, {headers});
 }
 
-export function post(url, data){
+export function postLogin(url, data){
     // const axios = axiosInstance();
     //const headers = getAuthHeaders();
-    return Axios.post(url, data/*,{headers}*/);
+    return Axios.post(url, data);
+}
+
+export function post(url, data){
+    // const axios = axiosInstance();
+    const headers = getAuthHeaders();
+    return Axios.post(url, data, {headers});
+}
+
+export function put(url){
+    // const axios = axiosInstance();
+    const headers = getAuthHeaders();
+    //console.log('***HEADERS***:  '+headers);
+    return Axios.put(url, {}, {headers});
 }

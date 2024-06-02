@@ -11,15 +11,12 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { InputLabel, Select, FormControl } from '@mui/material';
-import AdbIcon from '@mui/icons-material/Adb';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const pages = ['Novo Quadro'];
-const settings = ['Perfil', 'Logout'];
-const boards = ['**', '***'];
+const lista = ['Nova Lista'];
+const config = ['Perfil', 'Logout'];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({ addNewBoard }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -37,6 +34,11 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleNewListClick = () => {
+    addNewBoard();
+    handleCloseNavMenu();
   };
 
   return (
@@ -91,9 +93,9 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {lista.map((list) => (
+                <MenuItem key={list} onClick={handleNewListClick}>
+                  <Typography textAlign="center">{list}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -119,13 +121,13 @@ function ResponsiveAppBar() {
           </Typography>
           
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {lista.map((list) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={list}
+                onClick={handleNewListClick}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {list}
               </Button>
             ))}
           </Box>
@@ -152,9 +154,9 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {config.map((config) => (
+                <MenuItem key={config} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{config}</Typography>
                 </MenuItem>
               ))}
             </Menu>

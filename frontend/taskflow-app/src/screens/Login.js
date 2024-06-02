@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Adapter, { post } from '../adapters/OrdinaryAdapter';
+import Adapter, { postLogin } from '../adapters/OrdinaryAdapter';
 import Config from '../config.json';
 import { useNavigate } from 'react-router-dom';
 import {TextField, Button, Card, CardContent, CardActions, CardMedia, Typography, colors } from '@mui/material/';
 import { styled } from '@mui/system';
-import { Navigate, Router } from "react-router-dom";
+//import { Navigate, Router } from "react-router-dom";
 
 
 const RoundedTextField = styled(TextField)({
@@ -51,7 +51,7 @@ export default function Login() {
     }
 
     try {
-      const response = await post(Config.apiURL+'auth/login', requestBody)
+      const response = await postLogin(Config.apiURL+'auth/login', requestBody)
       const { token } = response.data;
       localStorage.setItem("token", token);
       navigate('/Home');
