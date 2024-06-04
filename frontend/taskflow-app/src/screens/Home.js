@@ -24,12 +24,23 @@ import Lists from '../components/Lists.js';
 //     color: '#ffffff'
 // });
 
-async function GetAllList() {
+async function GetAllListWithTasks() {
     try {
-        const response = await get(Config.apiURL + 'list/')
-        return response.data;
+        const response = await get(Config.apiURL + 'list/');
+        const lists = response.data;
+        
+        // Para cada lista, busca todas as tarefas associadas
+        const listsWithTasks = await Promise.all(
+            lists.map(async (list) => {
+                const tasksResponse = await get(Config.apiURL + `list/${list.id}`);
+                const tasks = tasksResponse.data.tasks;
+                return { ...list, tasks };
+            })
+        );
+        
+        return listsWithTasks;
     } catch (error) {
-        console.error("Erro ao carregar Listas", error);
+        console.error("Erro ao carregar Listas com Tarefas", error);
         throw error;
     }
 }
@@ -64,7 +75,7 @@ export default function TaskList(){
     useEffect(() => {
         async function fetchBoards() {
             try {
-                const data = await GetAllList();
+                const data = await GetAllListWithTasks();
                 setLists(data); 
             } catch (error) {
                 console.error("Erro ao carregar Listas.");
@@ -118,6 +129,3 @@ export default function TaskList(){
         </div>
     )
 }
-
-
-

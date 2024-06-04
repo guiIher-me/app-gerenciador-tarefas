@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Adapter, { postLogin } from '../adapters/OrdinaryAdapter';
+import Adapter, { postLoginRegister } from '../adapters/OrdinaryAdapter';
 import Config from '../config.json';
 import { useNavigate } from 'react-router-dom';
 import {TextField, Button, Card, CardContent, CardActions, CardMedia, Typography, colors } from '@mui/material/';
@@ -51,7 +51,7 @@ export default function Login() {
     }
 
     try {
-      const response = await postLogin(Config.apiURL+'auth/login', requestBody)
+      const response = await postLoginRegister(Config.apiURL+'auth/login', requestBody)
       const { token } = response.data;
       localStorage.setItem("token", token);
       navigate('/Home');

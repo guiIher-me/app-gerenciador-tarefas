@@ -23,7 +23,7 @@ export function get(url){
     return Axios.get(url, {headers});
 }
 
-export function postLogin(url, data){
+export function postLoginRegister(url, data){
     // const axios = axiosInstance();
     //const headers = getAuthHeaders();
     return Axios.post(url, data);
@@ -40,4 +40,11 @@ export function put(url){
     const headers = getAuthHeaders();
     //console.log('***HEADERS***:  '+headers);
     return Axios.put(url, {}, {headers});
+}
+
+export function del(url){
+    // const axios = axiosInstance();
+    const headers = getAuthHeaders();
+    //console.log('***HEADERS***:  '+headers);
+    return Axios.delete(url, {}, {headers});
 }

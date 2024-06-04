@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Config from '../config.json';
-import Adapter, { post } from '../adapters/OrdinaryAdapter';
+import Adapter, { postLoginRegister } from '../adapters/OrdinaryAdapter';
 import { useNavigate } from "react-router-dom";
 import {TextField, Button, Card, CardContent, CardMedia} from '@mui/material/';
 import { styled } from '@mui/system';
@@ -54,7 +54,7 @@ export default function Register() {
     }
 
     try {
-      const response = await post(Config.apiURL+'auth/register', requestBody)
+      const response = await postLoginRegister(Config.apiURL+'auth/register', requestBody)
       const { token } = response.data;
       localStorage.setItem("token", token);
       navigate('/');

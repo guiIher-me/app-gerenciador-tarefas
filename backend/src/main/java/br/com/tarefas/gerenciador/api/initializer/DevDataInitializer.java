@@ -39,15 +39,15 @@ public class DevDataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // Add users
-        this.addUser("Mr. Mock", "mock@mock.com", "mock123", UserRoleEnum.ADMIN);
-        this.addUser("Testerson", "test@test.com", "test123", UserRoleEnum.USER);
+        // this.addUser("Mr. Mock", "mock@mock.com", "mock123", UserRoleEnum.ADMIN);
+        // this.addUser("Testerson", "test@test.com", "test123", UserRoleEnum.USER);
 
-        // Add Task Lists
-        this.addList("To Do", null);
-        this.addList("Development", 1L);
-        this.addList("Blocked", 2L);
-        this.addList("Testing", 3L);
-        this.addList("Done", 4L);
+        // // Add Task Lists
+        // this.addList("To Do", null);
+        // this.addList("Development", 1L);
+        // this.addList("Blocked", 2L);
+        // this.addList("Testing", 3L);
+        // this.addList("Done", 4L);
        
         // Add Cards
         // this.addCard("Card 1", "desc card", (long) 2, (long) 1, "24/03/2015", "27/03/2015");
