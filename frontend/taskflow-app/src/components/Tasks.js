@@ -1,6 +1,8 @@
-import React from 'react';
-import { TextField, Card, Stack, IconButton } from '@mui/material/';
+import React, { useEffect, useState } from 'react';
+import { TextField, Card, Stack, IconButton, Autocomplete, CircularProgress } from '@mui/material/';
 import { styled } from '@mui/system';
+import Config from '../config.json';
+import Adapter, { get } from '../adapters/OrdinaryAdapter';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const CardEmProgresso = styled(Card)({
@@ -34,6 +36,28 @@ const TextFieldBlackText = styled(TextField)({
 });
 
 export default function Tasks({ tasks, handleProgressoChange, handleDeleteTask, listId }) {
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            setLoading(true);
+            try {
+                const response = await get(Config.apiURL + 'user/');
+                setUsers(response.data);
+            } catch (error) {
+                console.error('Erro ao buscar usuários:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchUsers();
+    }, []);
+
+    const handleUserChange = (event, value, taskIndex) => {
+        const userIds = value.map(user => user.id);
+        handleProgressoChange(listId, taskIndex, 'usersIds', userIds);
+    };
 
     const handleBlurOrEnter = (listId, cardIndex, field, value) => {
         handleProgressoChange(listId, cardIndex, field, value);
@@ -47,12 +71,14 @@ export default function Tasks({ tasks, handleProgressoChange, handleDeleteTask, 
     };
 
     return (
-        <>
+        <div>
             {tasks && tasks.map((task, taskIndex) => (
-                <CardEmProgresso key={taskIndex}>
-                    <DeleteButton onClick={() => handleDeleteTask(listId, taskIndex)}>
+                <CardEmProgresso key={taskIndex} id={task.id}>
+
+                    <DeleteButton onClick={() => handleDeleteTask(listId, taskIndex, task.id)}>
                         <DeleteIcon />
                     </DeleteButton>
+
                     <TextFieldBlackText
                         variant="standard"
                         fullWidth
@@ -88,6 +114,48 @@ export default function Tasks({ tasks, handleProgressoChange, handleDeleteTask, 
                             style: { color: '#000' }
                         }}
                     />
+                    {task.isSaved ? (
+                        <TextFieldBlackText
+                            variant="outlined"
+                            fullWidth
+                            value={Array.isArray(task.usersNames) ? task.usersNames.join(', ') : ''} // Ensure usersNames is an array
+                            InputProps={{
+                                readOnly: true,
+                                style: { color: '#000' }
+                            }}
+                            style={{ marginTop: '8px' }}
+                            placeholder="Usuários"
+                        />
+                    ) : (
+                        <Autocomplete
+                            multiple
+                            options={users}
+                            getOptionLabel={(option) => option.name}
+                            value={users.filter(user => task.usersIds && task.usersIds.includes(user.id))}
+                            onChange={(event, value) => handleUserChange(event, value, taskIndex)}
+                            loading={loading}
+                            getOptionKey={(option) => option.id}
+                            renderInput={(params) => (
+                                <TextFieldBlackText
+                                    {...params}
+                                    variant="outlined"
+                                    label="Usuários"
+                                    placeholder="Selecione os usuários"
+                                    InputProps={{
+                                        ...params.InputProps,
+                                        endAdornment: (
+                                            <>
+                                                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                                {params.InputProps.endAdornment}
+                                            </>
+                                        ),
+                                    }}
+                                />
+                            )}
+                            style={{ marginTop: '8px' }}
+                        />
+                    )}
+
                     <Stack direction="row" spacing={2} style={{ marginTop: '8px' }}>
                         <TextFieldBlackText
                             variant="outlined"
@@ -122,6 +190,6 @@ export default function Tasks({ tasks, handleProgressoChange, handleDeleteTask, 
                     </Stack>
                 </CardEmProgresso>
             ))}
-        </>
+        </div>
     );
 }

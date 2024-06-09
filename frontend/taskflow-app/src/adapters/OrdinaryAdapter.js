@@ -19,7 +19,7 @@ const getAuthHeaders = () => {
 export function get(url){
     // const axios = axiosInstance();
     const headers = getAuthHeaders();
-    //console.log('***HEADERS***:  '+headers.Authorization);
+    console.log('***HEADERS***:  '+headers.Authorization);
     return Axios.get(url, {headers});
 }
 
