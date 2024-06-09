@@ -13,6 +13,7 @@ import lombok.Data;
 public class SimpleTaskDTO {
     private Long id;
     private String title;
+    private String description;
     private List<String> usersNames;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -26,6 +27,7 @@ public class SimpleTaskDTO {
     public SimpleTaskDTO(Task task) {
         this.id = task.getId();
         this.title = task.getTitle();
+        this.description = task.getDescription();
 
         this.usersNames = task.getUsers().stream()
             .map(user -> user.getName())
