@@ -310,6 +310,7 @@
         {
             "id": 2,
             "title": "Card 1",
+            "description" : "creating test",
             "userName": "Testerson",
             "startDate": "24/03/2015",
             "endDate": "27/03/2015"
@@ -317,6 +318,7 @@
         {
             "id": 52,
             "title": "Card 52",
+            "description" : "creating test",
             "userName": "Testerson",
             "startDate": "24/03/2015",
             "endDate": "27/03/2015"
