@@ -9,6 +9,7 @@ import Login from './screens/Login.js'
 import Register from './screens/Register.js'
 import Home from './screens/Home.js';
 import { CssBaseline } from '@mui/material';
+import Logout from './screens/Logout.js';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path:'/Home',
     element: <Home/>
+  },
+  {
+    path:'/Logout',
+    element: <Logout/>
   }
 
 ]);

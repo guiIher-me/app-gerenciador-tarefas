@@ -12,13 +12,15 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
 
 const lista = ['Nova Lista'];
-const config = ['Perfil', 'Logout'];
+const config = ['Logout'];
 
 function ResponsiveAppBar({ addNewBoard }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const navigate = useNavigate(); // Mover useNavigate para dentro do componente
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -32,8 +34,11 @@ function ResponsiveAppBar({ addNewBoard }) {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (config) => {
     setAnchorElUser(null);
+    if (config === 'Logout') {
+      navigate('/Logout');
+    }
   };
 
   const handleNewListClick = () => {
@@ -152,10 +157,10 @@ function ResponsiveAppBar({ addNewBoard }) {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              onClose={() => handleCloseUserMenu()}
             >
               {config.map((config) => (
-                <MenuItem key={config} onClick={handleCloseUserMenu}>
+                <MenuItem key={config} onClick={() => handleCloseUserMenu(config)}>
                   <Typography textAlign="center">{config}</Typography>
                 </MenuItem>
               ))}

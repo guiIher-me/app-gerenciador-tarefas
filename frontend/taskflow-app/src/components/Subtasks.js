@@ -7,7 +7,7 @@ import { createSvgIcon } from '@mui/material/utils';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const CardEmProgresso = styled(Card)({
-    backgroundColor: "#ffbd59",
+    backgroundColor: "#00bf63",
     borderRadius: '5px',
     padding: '16px',
     marginTop: '16px',
@@ -40,7 +40,6 @@ export default function Tasks({ tasks, handleProgressoChange, handleDeleteTask, 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    //renderiza os usuários no combo box. useEffect garante a busca dos users logo após o componente ser montado.
     useEffect(() => {
         const fetchUsers = async () => {
             setLoading(true);

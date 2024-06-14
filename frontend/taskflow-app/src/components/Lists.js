@@ -5,6 +5,7 @@ import { createSvgIcon } from '@mui/material/utils';
 import Config from '../config.json';
 import { styled } from '@mui/system';
 import Tasks from './Tasks';
+import Subtasks from './Subtasks';
 import axios from 'axios';
 
 const HomeIcon = createSvgIcon(
@@ -40,6 +41,7 @@ export default function Lists({ lists, updateListTitle }) {
 
     const [tempTitles, setTempTitles] = useState({});
     const [progressoCards, setProgressoCards] = useState({});
+    const [progressoCardSubtasks, setProgressoCardsSubtasks] = useState({});
 
     useEffect(() => {
         const initializeProgressoCards = () => {
@@ -160,10 +162,7 @@ export default function Lists({ lists, updateListTitle }) {
         } catch (error) {
             console.error('Erro ao salvar/atualizar tarefa:', error);
         }
-    };
-    
-    
-    
+    };  
 
     const formatDateToScreen = (dateStr) => {
         const [day, month, year] = dateStr.split('/');
@@ -215,7 +214,14 @@ export default function Lists({ lists, updateListTitle }) {
                             handleDeleteTask={handleDeleteTask}
                             listId={list.id}
                         />
+                        {/* <Subtasks
+                            tasks={progressoCards[list.id] || []}
+                            handleProgressoChange={handleProgressoChange}
+                            handleDeleteTask={handleDeleteTask}
+                            listId={list.id}
+                        /> */}
                         <ButtonCriarTarefa variant="text" startIcon={<PlusIcon />} onClick={() => handleAddCardEmProgresso(list.id)}>Nova Tarefa</ButtonCriarTarefa>
+                        {/* <ButtonCriarTarefa variant="text" startIcon={<PlusIcon />} onClick={() => handleAddCardEmProgresso(list.id)}>Nova Sub-Tarefa</ButtonCriarTarefa> */}
                     </CardPendente>
                 ))}
             </div>

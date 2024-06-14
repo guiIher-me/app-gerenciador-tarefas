@@ -14,6 +14,12 @@ async function GetAllListWithTasks() {
             lists.map(async (list) => {
                 const tasksResponse = await get(Config.apiURL + `list/${list.id}`);
                 const tasks = tasksResponse.data.tasks || [];
+                // var subtask = [];
+                // try{
+                //     subtask.push(tasks.forEach(task => get(Config.apiURL+'subtask/'+task.id)));
+                // }
+                // catch(e){}
+                // console.log(subtask);
                 return { ...list, tasks };
             })
         );
@@ -51,6 +57,7 @@ const formatDateToScreen = (dateStr) => {
 };
 
 export default function TaskList() {
+    //add dados as listas (adicionar status -> userState)
     const [list, setLists] = useState([]);
     const [selectedUserIds, setSelectedUserIds] = useState([]);
         

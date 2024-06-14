@@ -16,10 +16,16 @@ const getAuthHeaders = () => {
     return token ? { 'Authorization': `Bearer ${token}` } : {};
 };
 
+export function deleteAuthHeaders(){
+    localStorage.clear();
+    console.log(localStorage.getItem("token"));
+
+}
+
 export function get(url){
     // const axios = axiosInstance();
     const headers = getAuthHeaders();
-    console.log('***HEADERS***:  '+headers.Authorization);
+    //console.log('***HEADERS***:  '+headers.Authorization);
     return Axios.get(url, {headers});
 }
 
