@@ -84,5 +84,5 @@ Diagrama de Classes UML gerado pela ferramenta [Visual Paradigm Online](https://
 </p>
 
 
-## 📜  Licença
+## 📜 Licença
 Esse projeto está sob licença MIT. Veja o arquivo [LICENSE](https://github.com/guiIher-me/app-gerenciador-tarefas/blob/main/LICENSE) para mais detalhes.

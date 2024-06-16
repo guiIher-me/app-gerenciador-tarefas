@@ -310,7 +310,6 @@
         {
             "id": 2,
             "title": "Card 1",
-            "description" : "creating test",
             "userName": "Testerson",
             "startDate": "24/03/2015",
             "endDate": "27/03/2015"
@@ -318,7 +317,6 @@
         {
             "id": 52,
             "title": "Card 52",
-            "description" : "creating test",
             "userName": "Testerson",
             "startDate": "24/03/2015",
             "endDate": "27/03/2015"
@@ -626,7 +624,7 @@
 
 ```json
 {
-    "title": "Sub Subtask Title",
+    "title": "Subtask Title",
     "description": "creating subtask",
     "usersIds": [1,2],
     "listId": 3,
@@ -706,6 +704,19 @@
     "status": 404,
     "message": "Subtask not found!"
 }
+```
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: helth-check
+### Method: GET
+>```
+>{{baseUrl}}/ping
+>```
+### Response: 200
+```json
+pong
 ```
 
 
