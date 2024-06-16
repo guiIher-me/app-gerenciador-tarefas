@@ -50,11 +50,12 @@ No diretório raiz do projeto, execute o terminal linux e siga o passo-a-passo a
 ## 🐋 Como Executar via Docker
 
 No diretório raiz do projeto, execute o terminal e siga o passo-a-passo abaixo:
- 1. No arquivo **application.properties**, modifique a propriedade *spring.datasource.url* para: `spring.datasource.url=jdbc:postgresql://db:5432/task_manager`
- 2. Execute o comando `cd backend` para ir para o diretório raiz do backend;
- 3. Inicie o Docker. Caso esteja usando WSL, habilite a integração no app Docker Desktop > Settings > Resources > "Enable integration with additional distros";
- 4. Rode o comando `docker-compose up --build`  para construir e inicializar o projeto;
- 5. Enjoy!
+ 1. No arquivo **application.properties**, modifique a propriedade *spring.datasource.url* para: `spring.datasource.url=jdbc:postgresql://db:5432/task_manager`;
+ 2. Ainda no arquivo arquivo **application.properties**, se necessário, atualize as propriedades *spring.datasource.username* e *spring.datasource.password* com os respectivos valores dos campos *POSTGRES_USER* e *POSTGRES_PASSWORD* do arquivo **docker-compose.yml**;
+ 3. Execute o comando `cd backend` para ir para o diretório raiz do backend;
+ 4. Inicie o Docker. Caso esteja usando WSL, habilite a integração no app Docker Desktop > Settings > Resources > "Enable integration with additional distros";
+ 5. Rode o comando `docker-compose up --build`  para construir e inicializar o projeto;
+ 6. Enjoy!
 
 #### Como executar comandos SQL no DB Postgres via Docker:
  1. Execute o comando `cd backend` para ir para o diretório raiz do backend;
