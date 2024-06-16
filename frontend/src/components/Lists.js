@@ -5,13 +5,6 @@ import { createSvgIcon } from '@mui/material/utils';
 import Config from '../config.json';
 import { styled } from '@mui/system';
 import Tasks from './Tasks';
-import Subtasks from './Subtasks';
-import axios from 'axios';
-
-const HomeIcon = createSvgIcon(
-    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />,
-    'Home',
-);
 
 const PlusIcon = createSvgIcon(
     <svg
