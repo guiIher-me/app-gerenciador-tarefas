@@ -39,22 +39,22 @@ export default function Login() {
   };
 
   return (
-    <div>       
-      <div className="row">      
-        <Card id="cardLogin" className="col-md-4 mx-auto">
+    <div className="container">       
+      <div className="row">
+        <Card className="tf-main-form col-md-4 mx-auto">
+
           <CardMedia
             component="img"
-            className="mx-auto my-2"
-            alt="logo taskflow"
+            className="tf-form-logo mx-auto m2"
+            alt="logo TaskFlow"
             image="/logo2_taskflow.png"
-            sx={{ height: 100, width: "auto" }}
           />
+
           <CardContent>
-            {errorMessage && <p>{errorMessage}</p>}  
+            {errorMessage && <p className="tf-error-message">{errorMessage}</p>}  
             <form id="formLogin" onSubmit={handleSubmit}>
               <div className="form-group">
-                <TextField 
-                  id="tfEmail" 
+                <TextField
                   label="Email"
                   type="email"
                   variant="outlined"
@@ -62,10 +62,10 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   margin="dense"
-                  required 
+                  required
+                  autoComplete="on"
                 />
                 <TextField
-                  id="tfPassword"
                   label="Senha"
                   variant="outlined"
                   className="col-12"
@@ -74,6 +74,7 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   margin="dense"
                   required
+                  autoComplete="off"
 
                   InputProps={{
                     endAdornment: (
@@ -90,10 +91,9 @@ export default function Login() {
                   }}
                 />                  
               </div>
-              <div id="divBtnLogin" className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center">
                 <Button 
-                  id="btnLogin" 
-                  className="col-3" 
+                  className="col-3 mt-3" 
                   type="submit" 
                   variant="contained"
                 >
@@ -102,11 +102,11 @@ export default function Login() {
               </div>
             </form>
           </CardContent>
+
           <CardActions>
-            <div id="divRegistrar" className="col-12 d-flex justify-content-center">                  
-              <Typography color={'black'} margin={'6px'}>Ainda não tem uma conta?</Typography>
-              <Button 
-                id="btnRegistrar" 
+            <div className="col-12 d-flex justify-content-center">                  
+              <Typography className="tf-form-footer">Ainda não tem uma conta?</Typography>
+              <Button
                 variant="text"
                 href="/auth/register"
               >
@@ -114,7 +114,9 @@ export default function Login() {
               </Button>
             </div>
           </CardActions>
+
         </Card>
+
       </div>
     </div>
   );

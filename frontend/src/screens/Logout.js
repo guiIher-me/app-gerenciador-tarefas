@@ -8,23 +8,27 @@ export default function Logout() {
   HttpAuthToken.deleteToken();
 
   return (
-    <div>
+    <div className="container">
       <div className="row">
-        <Card id="cardLogin" className="col-md-4 mx-auto my-5">
+        <Card className="tf-main-form col-md-4 mx-auto">
+
           <CardMedia
             component="img"
-            className="mx-auto my-2"
-            alt="logo taskflow"
+            className="tf-form-logo mx-auto m2"
+            alt="logo TaskFlow"
             image="/logo2_taskflow.png"
-            sx={{ height: 100, width: "auto" }}
           />
-          <Typography textAlign="center">Agradecemos por usar <b>TaskFlow!</b></Typography>
+
+          <br/>
+          
+          <Typography textAlign="center">Agradecemos por escolher <b>TaskFlow!</b></Typography>
+
           <CardContent>
-            <div id="btnRegistrar" className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center">
               <Button
-                id="btnRegistrar"
                 variant="contained"
                 href="/auth/login"
+                className="mt-3"
               >
                 Login
               </Button>

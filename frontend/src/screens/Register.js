@@ -47,97 +47,100 @@ export default function Register() {
   };
 
   return (
-    <div>
-        <div className="row">      
-            <Card id="cardLogin" className="col-md-4 mx-auto my-5">
+    <div className="container">
+        <div className="row">
+          <Card className="tf-main-form col-md-4 mx-auto">
+
             <CardMedia
               component="img"
-              className="mx-auto my-2"
-              alt="logo taskflow"
+              className="tf-form-logo mx-auto m2"
+              alt="logo TaskFlow"
               image="/logo2_taskflow.png"
-              sx={{ height: 100, width: "auto" }}
             />
-              <CardContent>
-                {errorMessage && <p style={{"color": "black"}}>{errorMessage}</p>}         
-                              
-                  <form id="formLogin" onSubmit={handleSubmit}>
-                    <div className="form-group">
 
-                        <TextField 
-                          id="tfName" 
-                          label="Nome Completo" 
-                          variant="outlined"
-                          className="col-12"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          margin="dense"
-                          required 
-                        />
+            <CardContent>
+              {errorMessage && <p className="tf-error-message">{errorMessage}</p>}         
+                            
+                <form id="formRegister" onSubmit={handleSubmit}>
+                  <div className="form-group">
 
-                        <TextField 
-                          id="tfEmail" 
-                          label="Email"
-                          type="email"
-                          variant="outlined"
-                          className="col-12"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          margin="dense"
-                          required 
-                        />
+                      <TextField
+                        label="Nome Completo"
+                        type="text"
+                        variant="outlined"
+                        className="col-12"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        margin="dense"
+                        required
+                        autoComplete="on"
+                      />
 
-                        <TextField
-                          id="tfPassword"
-                          label="Senha"
-                          variant="outlined"
-                          className="col-12"
-                          type={showPassword ? 'text' : 'password'}
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          margin="dense"
-                          required
+                      <TextField
+                        label="Email"
+                        type="email"
+                        variant="outlined"
+                        className="col-12"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        margin="dense"
+                        required
+                        autoComplete="on"
+                      />
 
-                          InputProps={{
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <IconButton
-                                  aria-label="toggle password visibility"
-                                  onClick={handleClickShowPassword}
-                                  edge="end"
-                                >
-                                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                              </InputAdornment>
-                            )
-                          }}
-                        />    
-                    </div>
-                    
-                    <div id="divBtnRegister" className="d-flex justify-content-center">
-                      <Button 
-                      id="btnRegister" 
-                      className="col-5" 
-                      type="submit" 
-                      variant="contained">
-                        Registrar
-                      </Button>            
-                    </div>
-                  </form>
-              </CardContent>
-              <CardActions>
-            <div id="divRegistrar" className="col-12 d-flex justify-content-center">                  
-              <Typography color={'black'} margin={'6px'}>Já possui uma conta?</Typography>
-              <Button 
-                id="btnRegistrar" 
-                variant="text"
-                href="/auth/login"
-              >
-                Realize o Login!
-              </Button>
-            </div>
-          </CardActions>
-            </Card>
-          </div>
-      </div>
+                      <TextField
+                        id="field-password"
+                        label="Senha"
+                        variant="outlined"
+                        className="col-12"
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        margin="dense"
+                        required
+                        autoComplete="off"
+
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                edge="end"
+                              >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                              </IconButton>
+                            </InputAdornment>
+                          )
+                        }}
+                      />    
+                  </div>
+                  
+                  <div className="d-flex justify-content-center">
+                    <Button 
+                    className="col-5 mt-3" 
+                    type="submit"
+                    variant="contained">
+                      Registrar
+                    </Button>
+                  </div>
+                </form>
+            </CardContent>
+
+            <CardActions>
+              <div  className="col-12 d-flex justify-content-center">                  
+                <Typography className="tf-form-footer">Já possui uma conta?</Typography>
+                <Button 
+                  variant="text"
+                  href="/auth/login"
+                >
+                  Realize o Login!
+                </Button>
+              </div>
+            </CardActions>
+
+          </Card>
+        </div>
+    </div>
   );
 }
