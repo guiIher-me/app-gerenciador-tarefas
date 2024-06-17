@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -20,6 +21,7 @@ import br.com.tarefas.gerenciador.repository.UserRepository;
 import br.com.tarefas.gerenciador.service.UserService;
 
 @RestController
+@CrossOrigin(origins = "${frontend.origin}")
 @RequestMapping(value="/user")
 public class UserController {
 
