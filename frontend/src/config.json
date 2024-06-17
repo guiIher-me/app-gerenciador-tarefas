@@ -1,3 +1,9 @@
 {
-    "apiURL":"http://localhost:8080/v1/"
+    "apiURL": "http://localhost:8080/v1/",
+    "BASEPATH": "http://localhost:8080/v1",
+    "ENV": "DEV",
+    "MESSAGES": {
+        "INVALID_LOGIN": "Email ou senha inválidos",
+        "INTERNAL_SERVER_ERROR": "Servidor Indisponível. Tente novamente mais tarde!"
+    }
 }
