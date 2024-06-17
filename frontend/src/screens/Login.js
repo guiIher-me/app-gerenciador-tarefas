@@ -1,39 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Card, CardContent, CardActions, CardMedia, Typography, IconButton, InputAdornment } from '@mui/material/';
-import { styled } from '@mui/system';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { postLoginRegister } from '../adapters/OrdinaryAdapter';
 import Config from '../config.json';
 
-const RoundedTextField = styled(TextField)({
-  '& .MuiOutlinedInput-root': {
-    borderRadius: '20px',
-    backgroundColor:'#0000008a',
-    '&:hover fieldset': {
-      borderColor: '#024caf', // Cor da borda ao passar o mouse
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: '#ffbd59', // Cor da borda quando focado
-    },
-    '&.Mui-error fieldset': {
-      borderColor: '#f44336', // Cor da borda quando há um erro
-    },
-  },
-  '& .MuiInputLabel-root': {
-    '&.Mui-focused': {
-      color: '#ffbd59', // Cor do rótulo quando focado
-    },
-    '&.Mui-error': {
-      color: '#f44336', // Cor do rótulo quando há um erro
-    },
-  },
-});
-
-const RoundedCard = styled(Card)({
-  backgroundColor: "#eeece1",
-  borderRadius: '20px'
-});
+import { HttpRequest, HttpAuthToken } from "../http";
+const http = new HttpRequest();
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -51,12 +23,14 @@ export default function Login() {
     }
 
     try {
-      const response = await postLoginRegister(Config.apiURL+'auth/login', requestBody)
+      const response = await http.post(`${Config.BASEPATH}/auth/login`, requestBody);
       const { token } = response.data;
-      localStorage.setItem("token", token);
+      HttpAuthToken.setToken(token);
       navigate('/Home');
     } catch (error) {
-      setErrorMessage("Email ou senha inválidos");
+      const { status } = error.response;
+      if (status === 401) setErrorMessage(Config.MESSAGES.INVALID_LOGIN);
+      else setErrorMessage(Config.MESSAGES.INTERNAL_SERVER_ERROR);
     }
   };
 
@@ -67,28 +41,30 @@ export default function Login() {
   return (
     <div>       
       <div className="row">      
-        <RoundedCard id="cardLogin" className="col-md-4 mx-auto my-5">
+        <Card id="cardLogin" className="col-md-4 mx-auto">
           <CardMedia
             component="img"
             className="mx-auto my-2"
             alt="logo taskflow"
             image="/logo2_taskflow.png"
-            sx={{ height: 137, width: 154 }}
+            sx={{ height: 100, width: "auto" }}
           />
           <CardContent>
-            {errorMessage && <p>{errorMessage}</p>}         
+            {errorMessage && <p>{errorMessage}</p>}  
             <form id="formLogin" onSubmit={handleSubmit}>
               <div className="form-group">
-                <RoundedTextField 
+                <TextField 
                   id="tfEmail" 
-                  label="Email" 
+                  label="Email"
+                  type="email"
                   variant="outlined"
                   className="col-12"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  margin="dense"
                   required 
                 />
-                <RoundedTextField
+                <TextField
                   id="tfPassword"
                   label="Senha"
                   variant="outlined"
@@ -98,7 +74,7 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   margin="dense"
                   required
-                  //add olhinho para ver ou não a senha
+
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -120,14 +96,6 @@ export default function Login() {
                   className="col-3" 
                   type="submit" 
                   variant="contained"
-                  sx={{
-                    color: 'black',
-                    backgroundColor: '#024caf',
-                    margin: '10px', 
-                    '&:hover': {
-                      backgroundColor: '#00bf63', // Cor de fundo ao passar o mouse
-                    },
-                  }}
                 >
                   Login
                 </Button>            
@@ -136,18 +104,17 @@ export default function Login() {
           </CardContent>
           <CardActions>
             <div id="divRegistrar" className="col-12 d-flex justify-content-center">                  
-              <Typography color={'black'} margin={'6px'}>Ainda não tem conta?</Typography>
+              <Typography color={'black'} margin={'6px'}>Ainda não tem uma conta?</Typography>
               <Button 
                 id="btnRegistrar" 
                 variant="text"
                 href="/auth/register"
-                sx={{ color: '#002364' }}
               >
-                Registre-se
+                Registre-se!
               </Button>
             </div>
           </CardActions>
-        </RoundedCard>
+        </Card>
       </div>
     </div>
   );

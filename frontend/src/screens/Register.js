@@ -1,47 +1,23 @@
 import React, { useState } from "react";
 import Config from '../config.json';
-import Adapter, { postLoginRegister } from '../adapters/OrdinaryAdapter';
 import { useNavigate } from "react-router-dom";
-import {TextField, Button, Card, CardContent, CardMedia} from '@mui/material/';
-import { styled } from '@mui/system';
+import { TextField, Button, Card, CardContent, CardActions, CardMedia, Typography, IconButton, InputAdornment } from '@mui/material/';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-const RoundedTextField = styled(TextField)({
-  '& .MuiOutlinedInput-root': {
-    borderRadius: '20px',
-    backgroundColor:'#0000008a',
-    margin:'5px',
-    '&:hover fieldset': {
-      borderColor: '#002364', // Cor da borda ao passar o mouse
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: '#ffbd59', // Cor da borda quando focado
-    },
-    '&.Mui-error fieldset': {
-      borderColor: '#f44336', // Cor da borda quando há um erro
-    },
-  },
-  '& .MuiInputLabel-root': {
-    '&.Mui-focused': {
-      color: '#ffbd59', // Cor do rótulo quando focado
-    },
-    '&.Mui-error': {
-      color: '#f44336', // Cor do rótulo quando há um erro
-    },
-  },
-
-});
-
-const RoundedCard = styled(Card)({
-    backgroundColor: "#eeece1",
-    borderRadius: '20px'
-});
+import { HttpRequest, HttpAuthToken } from "../http";
+const http = new HttpRequest();
 
 export default function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,84 +30,113 @@ export default function Register() {
     }
 
     try {
-      const response = await postLoginRegister(Config.apiURL+'auth/register', requestBody)
+      const response = await http.post(`${Config.BASEPATH}/auth/register`, requestBody)
       const { token } = response.data;
-      localStorage.setItem("token", token);
+      HttpAuthToken.setToken(token);
       navigate('/');
       
     } catch (error) {
-      setErrorMessage("Erro ao salvar registro!");
+      const { status } = error.response;
+      if (status === 500) {
+        setErrorMessage(Config.MESSAGES.INTERNAL_SERVER_ERROR);
+        return;
+      }
+
+      setErrorMessage(error.response.data.message);
     }
   };
 
   return (
-    <div>       
-          
+    <div>
         <div className="row">      
-            <RoundedCard id="cardLogin" className="col-md-4 mx-auto my-5">
+            <Card id="cardLogin" className="col-md-4 mx-auto my-5">
             <CardMedia
               component="img"
               className="mx-auto my-2"
               alt="logo taskflow"
               image="/logo2_taskflow.png"
-              sx={{ height: 137, width: 154 }}
+              sx={{ height: 100, width: "auto" }}
             />
               <CardContent>
-                {errorMessage && <p>{errorMessage}</p>}         
+                {errorMessage && <p style={{"color": "black"}}>{errorMessage}</p>}         
                               
                   <form id="formLogin" onSubmit={handleSubmit}>
                     <div className="form-group">
 
-                        <RoundedTextField 
+                        <TextField 
                           id="tfName" 
                           label="Nome Completo" 
                           variant="outlined"
                           className="col-12"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
+                          margin="dense"
                           required 
                         />
 
-                        <RoundedTextField 
+                        <TextField 
                           id="tfEmail" 
-                          label="Email" 
+                          label="Email"
+                          type="email"
                           variant="outlined"
                           className="col-12"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
+                          margin="dense"
                           required 
                         />
 
-                        <RoundedTextField
+                        <TextField
                           id="tfPassword"
                           label="Senha"
                           variant="outlined"
-                          className="col-12"                          
+                          className="col-12"
+                          type={showPassword ? 'text' : 'password'}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           margin="dense"
                           required
-                        />                  
 
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton
+                                  aria-label="toggle password visibility"
+                                  onClick={handleClickShowPassword}
+                                  edge="end"
+                                >
+                                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                              </InputAdornment>
+                            )
+                          }}
+                        />    
                     </div>
+                    
                     <div id="divBtnRegister" className="d-flex justify-content-center">
                       <Button 
                       id="btnRegister" 
                       className="col-5" 
                       type="submit" 
-                      variant="contained"
-                      sx={{color: 'black',
-                          backgroundColor: '#002364',
-                          margin:'5px', 
-                      '&:hover': {
-                        backgroundColor: '#00bf63', // Cor de fundo ao passar o mouse
-                      },
-                      }}>
-                        Registrar-me</Button>            
+                      variant="contained">
+                        Registrar
+                      </Button>            
                     </div>
                   </form>
               </CardContent>
-            </RoundedCard>
+              <CardActions>
+            <div id="divRegistrar" className="col-12 d-flex justify-content-center">                  
+              <Typography color={'black'} margin={'6px'}>Já possui uma conta?</Typography>
+              <Button 
+                id="btnRegistrar" 
+                variant="text"
+                href="/auth/login"
+              >
+                Realize o Login!
+              </Button>
+            </div>
+          </CardActions>
+            </Card>
           </div>
       </div>
   );
