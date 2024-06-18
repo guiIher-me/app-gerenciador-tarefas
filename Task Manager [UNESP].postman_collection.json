@@ -700,6 +700,105 @@
 			"name": "user",
 			"item": [
 				{
+					"name": "getByToken",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "[200] Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 18 Jun 2024 00:34:31 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Mr. Mock\",\n    \"email\": \"mock@mock.com\",\n    \"role\": \"ADMIN\",\n    \"enabled\": true,\n    \"username\": \"mock@mock.com\"\n}"
+						}
+					]
+				},
+				{
 					"name": "getById",
 					"request": {
 						"method": "GET",
@@ -960,13 +1059,13 @@
 					]
 				},
 				{
-					"name": "updateById",
+					"name": "updateByToken",
 					"request": {
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Testerson\",\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"testerson1234\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Mock Jr.\",\r\n    \"oldPassword\": \"mock12345\",\r\n    \"newPassword\": \"mock123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -974,19 +1073,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/user/:id",
+							"raw": "{{baseUrl}}/user/",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"user",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "2"
-								}
+								""
 							]
 						}
 					},
@@ -998,7 +1091,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Testerson\",\r\n    \"email\": \"test@test.com.br\",\r\n    \"password\": \"testerson123\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Mock Jr.\",\r\n    \"oldPassword\": \"mock12345\",\r\n    \"newPassword\": \"mock123\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1006,19 +1099,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/user/:id",
+									"raw": "{{baseUrl}}/user/",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"user",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "2"
-										}
+										""
 									]
 								}
 							},
@@ -1026,6 +1113,42 @@
 							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
 								{
 									"key": "Content-Type",
 									"value": "application/json"
@@ -1036,7 +1159,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 25 Mar 2024 01:09:00 GMT"
+									"value": "Tue, 18 Jun 2024 02:12:28 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -1048,7 +1171,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 2,\n    \"name\": \"Testerson\",\n    \"email\": \"test@test.com.br\",\n    \"roleNames\": [\n        \"USER\"\n    ]\n}"
+							"body": "{\n    \"id\": 102,\n    \"name\": \"Mock Jr.\",\n    \"email\": \"new@test.com\",\n    \"role\": \"USER\",\n    \"enabled\": true,\n    \"username\": \"new@test.com\"\n}"
 						},
 						{
 							"name": "[200] Update Name Only",
@@ -1057,7 +1180,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Testerson Jr.\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Mock 2\"\r\n    // \"oldPassword\": \"\",\r\n    // \"newPassword\": \"\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1065,19 +1188,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/user/:id",
+									"raw": "{{baseUrl}}/user/",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"user",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "2"
-										}
+										""
 									]
 								}
 							},
@@ -1085,6 +1202,42 @@
 							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
 								{
 									"key": "Content-Type",
 									"value": "application/json"
@@ -1095,7 +1248,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 25 Mar 2024 01:10:06 GMT"
+									"value": "Tue, 18 Jun 2024 01:31:37 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -1107,7 +1260,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 2,\n    \"name\": \"Testerson Jr.\",\n    \"email\": \"test@test.com.br\",\n    \"roleNames\": [\n        \"USER\"\n    ]\n}"
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Mock 2\",\n    \"email\": \"mock@mock.com\",\n    \"role\": \"ADMIN\",\n    \"enabled\": true,\n    \"username\": \"mock@mock.com\"\n}"
 						},
 						{
 							"name": "[200] Update Password Only",
@@ -1116,7 +1269,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"password\": \"testerson1234\"\r\n}",
+									"raw": "{\r\n    // \"name\": \"Mock 2\",\r\n    \"oldPassword\": \"mock12345\",\r\n    \"newPassword\": \"mock123\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1124,19 +1277,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/user/:id",
+									"raw": "{{baseUrl}}/user/",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"user",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "2"
-										}
+										""
 									]
 								}
 							},
@@ -1144,6 +1291,42 @@
 							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
 								{
 									"key": "Content-Type",
 									"value": "application/json"
@@ -1154,7 +1337,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 25 Mar 2024 01:11:16 GMT"
+									"value": "Tue, 18 Jun 2024 02:11:10 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -1166,7 +1349,177 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 2,\n    \"name\": \"Testerson Jr.\",\n    \"email\": \"test@test.com.br\",\n    \"roleNames\": [\n        \"USER\"\n    ]\n}"
+							"body": "{\n    \"id\": 102,\n    \"name\": \"New Test\",\n    \"email\": \"new@test.com\",\n    \"role\": \"USER\",\n    \"enabled\": true,\n    \"username\": \"new@test.com\"\n}"
+						},
+						{
+							"name": "[400] Fill All Password Fields",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Mock 2\",\r\n    \"oldPassword\": \"\"\r\n    // \"newPassword\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 18 Jun 2024 01:32:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"Fill all password fields!\"\n}"
+						},
+						{
+							"name": "[400] Umatch Old Password",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"name\": \"Mock 2\",\r\n    \"oldPassword\": \"teste123\",\r\n    \"newPassword\": \"nova-senha\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 18 Jun 2024 01:45:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"Unmatch old password!\"\n}"
 						},
 						{
 							"name": "[400] Invalid Password",
@@ -1222,61 +1575,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status\": 400,\n    \"message\": \"Password must have at least 6 characters\"\n}"
-						},
-						{
-							"name": "[400] Email In Use",
-							"originalRequest": {
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Testerson\",\r\n    \"email\": \"mock@mock.com\",\r\n    \"password\": \"teste\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/user/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"user",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 25 Mar 2024 01:09:19 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "close"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"status\": 400,\n    \"message\": \"E-mail already in use by another user!\"\n}"
 						}
 					]
 				},
@@ -1639,6 +1937,42 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json"
 								},
@@ -1648,7 +1982,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sun, 24 Mar 2024 20:17:42 GMT"
+									"value": "Tue, 18 Jun 2024 04:18:24 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -1660,7 +1994,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 1,\n    \"title\": \"To Do\",\n    \"position\": 1,\n    \"tasks\": [\n        {\n            \"id\": 2,\n            \"title\": \"Card 1\",\n            \"userName\": \"Testerson\",\n            \"startDate\": \"24/03/2015\",\n            \"endDate\": \"27/03/2015\"\n        },\n        {\n            \"id\": 52,\n            \"title\": \"Card 52\",\n            \"userName\": \"Testerson\",\n            \"startDate\": \"24/03/2015\",\n            \"endDate\": \"27/03/2015\"\n        }\n    ]\n}"
+							"body": "{\n    \"id\": 1,\n    \"title\": \"To Do\",\n    \"position\": 1,\n    \"tasks\": [\n        {\n            \"id\": 1,\n            \"title\": \"Task Title\",\n            \"description\": \"creating task\",\n            \"usersNames\": [\n                \"Testerson\",\n                \"Mock Teste\"\n            ],\n            \"startDate\": \"01/01/2024\",\n            \"endDate\": \"30/12/2024\",\n            \"subtask\": false\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Subtask Title\",\n            \"description\": \"creating subtask\",\n            \"usersNames\": [\n                \"Testerson\",\n                \"Mock Teste\"\n            ],\n            \"startDate\": \"01/01/2025\",\n            \"endDate\": \"30/12/2025\",\n            \"subtask\": true\n        }\n    ]\n}"
 						},
 						{
 							"name": "[404] Not Found",
@@ -1711,6 +2045,105 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status\": 404,\n    \"message\": \"List not found!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "getAllDetailed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/list/detailed",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"list",
+								"detailed"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "[200] Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/list/detailed",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"list",
+										"detailed"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 18 Jun 2024 04:35:29 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 6,\n        \"title\": \"Backlog\",\n        \"position\": 0.5,\n        \"tasks\": []\n    },\n    {\n        \"id\": 1,\n        \"title\": \"To Do\",\n        \"position\": 1,\n        \"tasks\": [\n            {\n                \"id\": 1,\n                \"title\": \"Task Title\",\n                \"description\": \"creating task\",\n                \"usersNames\": [\n                    \"Testerson\",\n                    \"Mock Teste\"\n                ],\n                \"startDate\": \"01/01/2024\",\n                \"endDate\": \"30/12/2024\",\n                \"subtask\": false\n            },\n            {\n                \"id\": 2,\n                \"title\": \"Subtask Title\",\n                \"description\": \"creating subtask\",\n                \"usersNames\": [\n                    \"Testerson\",\n                    \"Mock Teste\"\n                ],\n                \"startDate\": \"01/01/2025\",\n                \"endDate\": \"30/12/2025\",\n                \"subtask\": true\n            },\n            {\n                \"id\": 53,\n                \"title\": \"Task Title\",\n                \"description\": \"creating task\",\n                \"usersNames\": [\n                    \"Testerson\",\n                    \"Mock Teste\"\n                ],\n                \"startDate\": \"01/01/2024\",\n                \"endDate\": \"30/12/2024\",\n                \"subtask\": false\n            }\n        ]\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Development\",\n        \"position\": 2,\n        \"tasks\": []\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Blocked\",\n        \"position\": 3,\n        \"tasks\": [\n            {\n                \"id\": 52,\n                \"title\": \"Subtask Title\",\n                \"description\": \"creating subtask\",\n                \"usersNames\": [\n                    \"Testerson\",\n                    \"Mock Teste\"\n                ],\n                \"startDate\": \"01/01/2025\",\n                \"endDate\": \"30/12/2025\",\n                \"subtask\": true\n            }\n        ]\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Testing\",\n        \"position\": 4,\n        \"tasks\": []\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Done\",\n        \"position\": 5,\n        \"tasks\": []\n    },\n    {\n        \"id\": 7,\n        \"title\": \"New List\",\n        \"position\": 6,\n        \"tasks\": []\n    }\n]"
 						}
 					]
 				},
@@ -2155,7 +2588,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 52,\n    \"title\": \"10\",\n    \"description\": \"creating task\",\n    \"users\": [\n        {\n            \"id\": 1,\n            \"name\": \"Mr. Mock\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Testerson\"\n        }\n    ],\n    \"list\": {\n        \"id\": 1,\n        \"title\": \"To Do\"\n    },\n    \"startDate\": \"01/01/2024\",\n    \"endDate\": \"30/12/2024\"\n}"
+							"body": "{\n    \"id\": 52,\n    \"title\": \"10\",\n    \"description\": \"creating task\",\n    \"users\": [\n        {\n            \"id\": 1,\n            \"name\": \"Mr. Mock\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Testerson\"\n        }\n    ],\n    \"list\": {\n        \"id\": 1,\n        \"title\": \"To Do\"\n    },\n    \"startDate\": \"01/01/2024\",\n    \"endDate\": \"30/12/2024\",\n    \"subtask\": false\n}"
 						},
 						{
 							"name": "[404] User Not Found",
@@ -2668,7 +3101,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 2,\n    \"title\": \"Card 1\",\n    \"description\": \"desc card\",\n    \"user\": {\n        \"id\": 2,\n        \"name\": \"Testerson\"\n    },\n    \"list\": {\n        \"id\": 3,\n        \"title\": \"Blocked\"\n    },\n    \"startDate\": \"24/03/2015\",\n    \"endDate\": \"27/03/2015\"\n}"
+							"body": "{\n    \"id\": 2,\n    \"title\": \"Card 1\",\n    \"description\": \"desc card\",\n    \"user\": {\n        \"id\": 2,\n        \"name\": \"Testerson\"\n    },\n    \"list\": {\n        \"id\": 3,\n        \"title\": \"Blocked\"\n    },\n    \"startDate\": \"24/03/2015\",\n    \"endDate\": \"27/03/2015\",\n    \"subtask\": false\n}"
 						},
 						{
 							"name": "[404] Task Not Found",
@@ -3019,7 +3452,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 52,\n    \"title\": \"Sub Subtask Title\",\n    \"description\": \"creating subtask\",\n    \"users\": [\n        {\n            \"id\": 1,\n            \"name\": \"Mr. Mock\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Testerson\"\n        }\n    ],\n    \"list\": {\n        \"id\": 3,\n        \"title\": \"Blocked\"\n    },\n    \"startDate\": \"01/01/2025\",\n    \"endDate\": \"30/12/2025\",\n    \"parentTaskId\": 1\n}"
+							"body": "{\n    \"id\": 52,\n    \"title\": \"Sub Subtask Title\",\n    \"description\": \"creating subtask\",\n    \"users\": [\n        {\n            \"id\": 1,\n            \"name\": \"Mr. Mock\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Testerson\"\n        }\n    ],\n    \"list\": {\n        \"id\": 3,\n        \"title\": \"Blocked\"\n    },\n    \"startDate\": \"01/01/2025\",\n    \"endDate\": \"30/12/2025\",\n    \"parentTaskId\": 1,\n    \"subtask\": true\n}"
 						},
 						{
 							"name": "[422] Invalid Parent ID",
@@ -3129,7 +3562,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "52"
 								}
 							]
 						}
@@ -3219,7 +3652,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 2,\n    \"title\": \"Sub Subtask Title\",\n    \"description\": \"creating subtask\",\n    \"users\": [\n        {\n            \"id\": 2,\n            \"name\": \"Testerson\"\n        }\n    ],\n    \"list\": {\n        \"id\": 3,\n        \"title\": \"Blocked\"\n    },\n    \"startDate\": \"01/01/2025\",\n    \"endDate\": \"30/12/2025\",\n    \"parentTaskId\": 1\n}"
+							"body": "{\n    \"id\": 2,\n    \"title\": \"Sub Subtask Title\",\n    \"description\": \"creating subtask\",\n    \"users\": [\n        {\n            \"id\": 2,\n            \"name\": \"Testerson\"\n        }\n    ],\n    \"list\": {\n        \"id\": 3,\n        \"title\": \"Blocked\"\n    },\n    \"startDate\": \"01/01/2025\",\n    \"endDate\": \"30/12/2025\",\n    \"parentTaskId\": 1,\n    \"subtask\": true\n}"
 						},
 						{
 							"name": "[404] Not found",
@@ -3314,6 +3747,9 @@
 		{
 			"name": "helth-check",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
