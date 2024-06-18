@@ -4,6 +4,7 @@
     "ENV": "DEV",
     "MESSAGES": {
         "INVALID_LOGIN": "Email ou senha inválidos!",
-        "INTERNAL_SERVER_ERROR": "Servidor Indisponível. Tente novamente mais tarde!"
+        "INTERNAL_SERVER_ERROR": "Servidor Indisponível. Tente novamente mais tarde!",
+        "UNEXPECTED_ERROR": "Desculpe, tivemos um erro inesperado. Por favor, tente acessar novamente mais tarde!"
     }
 }
