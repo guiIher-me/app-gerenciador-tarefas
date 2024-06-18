@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.tarefas.gerenciador.dto.tasklist.SimpleTaskListDTO;
 import br.com.tarefas.gerenciador.dto.user.SimpleUserDTO;
+import br.com.tarefas.gerenciador.model.Subtask;
 import br.com.tarefas.gerenciador.model.Task;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class GetTaskDTO {
     protected String description;
     protected List<SimpleUserDTO> users;
     protected SimpleTaskListDTO list;
+    protected boolean isSubtask;
     
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate startDate;
@@ -39,5 +41,6 @@ public class GetTaskDTO {
         this.list = new SimpleTaskListDTO(task.getTaskList());
         this.startDate = task.getStartDate();
         this.endDate = task.getEndDate();
+        this.isSubtask = task instanceof Subtask;
     }
 }

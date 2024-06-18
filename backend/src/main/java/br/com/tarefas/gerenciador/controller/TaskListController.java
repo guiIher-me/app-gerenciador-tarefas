@@ -1,6 +1,7 @@
 package br.com.tarefas.gerenciador.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,6 +53,17 @@ public class TaskListController {
     public ResponseEntity<List<TaskList>> getAll() {
         List<TaskList> tasklists = this.taskListRepository.findAll();
         return ResponseEntity.ok().body(tasklists);
+    }
+
+    @GetMapping(value = "/detailed", produces = "application/json")
+    public ResponseEntity<List<GetTaskListDTO>> getAllDetailed() {
+        List<TaskList> tasklists = this.taskListRepository.findAll();
+
+        List<GetTaskListDTO> getTaskListDTOs = tasklists.stream()
+            .map(taskList -> new GetTaskListDTO(taskList))
+            .collect(Collectors.toList());
+
+        return ResponseEntity.ok().body(getTaskListDTOs);
     }
 
     @PutMapping(value = "/{id}/title/{newTitle}", produces = "application/json")
