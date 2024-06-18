@@ -22,6 +22,6 @@ public class Utils {
         } catch (DateTimeParseException e) {
             throw new InvalidParameterException("Invalid date '" + stringDate+"'");
         }
-    }   
+    }
     
 }

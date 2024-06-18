@@ -1,6 +1,4 @@
 package br.com.tarefas.gerenciador.dto.user;
-
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -8,9 +6,8 @@ import lombok.Data;
 public class UpdateUserDTO {
     private String name;
 
-    @Email(message = "{validation.email.format}")
-    private String email;
+    String oldPassword;
 
     @Size(min = 6, message = "{validation.password.length}")
-    private String password;
+    String newPassword;
 }

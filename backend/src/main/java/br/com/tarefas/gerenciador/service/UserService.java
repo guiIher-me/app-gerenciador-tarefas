@@ -90,27 +90,44 @@ public class UserService {
     }
 
     @SuppressWarnings("null")
+    public User updateByToken(UpdateUserDTO user) throws HttpBadRequestException {
+        User existingUser = this.getCurrentUser();
+        return this.update(user, existingUser);
+    }
+
+    @SuppressWarnings("null")
     public User updateById(Long id, UpdateUserDTO user) throws HttpBadRequestException {
         User existingUser = getOrFail(id);
-        User userWithEmail = userRepository.findByEmail(user.getEmail());
-        
-        if (userWithEmail != null && !userWithEmail.getId().equals(id))
-            throw new HttpBadRequestException("E-mail already in use by another user!");
-        
+        return this.update(user, existingUser);
+    }
+
+    protected User update(UpdateUserDTO user, User existingUser) throws HttpBadRequestException {
         if (user.getName() != null)
             existingUser.setName(user.getName());
+            
+        if (user.getOldPassword() != null ^ user.getNewPassword() != null) // XOR
+            throw new HttpBadRequestException("Fill all password fields!");
 
-        if (user.getEmail() != null)
-            existingUser.setEmail(user.getEmail());
-
-        if(user.getPassword() != null) {
-            existingUser.setPassword(user.getPassword());
+        if (user.getOldPassword() != null) {
+            this.assertOldPassword(user, existingUser);
+            existingUser.setPassword(user.getNewPassword());
             encodePassword(existingUser);
         }
 
         User updatedUser = userRepository.save(existingUser);        
         return updatedUser;
     }
+
+    protected void assertOldPassword(UpdateUserDTO user, User existingUser) throws HttpBadRequestException {
+        System.out.println("Chegou aqui");
+        String oldPasswordEncoded = existingUser.getPassword();
+        System.out.println(oldPasswordEncoded);
+
+        String oldPassword = user.getOldPassword();
+        if ( !encoder.matches(oldPassword, oldPasswordEncoded))
+            throw new HttpBadRequestException("Unmatch old password!");
+    }
+
 
     @SuppressWarnings("null")
     public void deleteById(Long id) {

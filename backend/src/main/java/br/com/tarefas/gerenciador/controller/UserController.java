@@ -49,9 +49,9 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
-    @PatchMapping(value="/{id}", produces="application/json")
-    public ResponseEntity<User> updateById(@PathVariable("id") @NonNull Long id, @Validated @RequestBody UpdateUserDTO user) throws HttpBadRequestException {
-        User updatedUser = userService.updateById(id, user);
+    @PatchMapping(value="/", produces="application/json")
+    public ResponseEntity<User> updateByToken(@Validated @RequestBody UpdateUserDTO user) throws HttpBadRequestException {
+        User updatedUser = userService.updateByToken(user);
         return ResponseEntity.ok(updatedUser);
     }
 
