@@ -5,8 +5,9 @@ import { TextField, Button, Card, CardContent, IconButton, InputAdornment } from
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Header from '../components/Header.js';
 
-import { HttpRequestAuth } from "../http";
 import { UnauthenticatedError } from "../exceptions/UnauthenticatedError.js";
+
+import { HttpRequestAuth } from "../http";
 const httpAuth = new HttpRequestAuth();
 
 export default function UserAccount() {
@@ -18,7 +19,6 @@ export default function UserAccount() {
     const [showOldPassword, setshowOldPassword] = useState(false);
     const [showNewPassword, setshowNewPassword] = useState(false);
     const [message, setMessage] = useState({text: "", type: null});
-
     const navigate = useNavigate();
 
     const resetFields = () => {
@@ -42,7 +42,7 @@ export default function UserAccount() {
             }
         }
         getUser();
-    }, []);
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -71,7 +71,6 @@ export default function UserAccount() {
         }
 
         try {
-            console.log("requesting...")
             const response = await httpAuth.patch(`${Config.BASEPATH}/user/`, requestBody);
             const { name } = response.data;
             resetFields();
