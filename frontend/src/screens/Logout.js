@@ -1,10 +1,13 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Button, Card, CardContent, CardMedia, Typography } from '@mui/material/';
 import { HttpAuthToken } from "../http";
 
 export default function Logout() {
   useNavigate();
+  const location = useLocation();
+  const message = location?.state?.optionalMessage || "Agradecemos por escolher TaskFlow!";
+
   HttpAuthToken.deleteToken();
 
   return (
@@ -21,7 +24,7 @@ export default function Logout() {
 
           <br/>
           
-          <Typography textAlign="center">Agradecemos por escolher <b>TaskFlow!</b></Typography>
+          <Typography textAlign="center">{message}</Typography>
 
           <CardContent>
             <div className="d-flex justify-content-center">

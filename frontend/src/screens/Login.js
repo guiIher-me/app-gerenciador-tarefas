@@ -51,7 +51,7 @@ export default function Login() {
           />
 
           <CardContent>
-            {errorMessage && <p className="tf-error-message">{errorMessage}</p>}  
+            {errorMessage && <p className="tf-message tf-message-error">{errorMessage}</p>}  
             <form id="formLogin" onSubmit={handleSubmit}>
               <div className="form-group">
                 <TextField
