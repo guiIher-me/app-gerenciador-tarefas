@@ -1,8 +1,22 @@
 
+:root {
+  --tf-primary-bg: #90caf9;
+  --tf-primary-dark: rgb(97, 151, 218);
+  --tf-primary-darken: rgb(38, 107, 190);
+  --tf-list-bg: #121212;
+}
+
 #root {
     height: 100vh;  
     background: linear-gradient(#0f1214, rgb(0 59 117 / 20%) 100%);
 }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+}
+
 
 .tf-main-form {
     min-width: 398px !important;
@@ -15,14 +29,238 @@ img.tf-form-logo {
     width: auto;
 }
 
-.tf-error-message {
-    color: #dc3545;
-    background-color: #dc354524;
+.tf-message {
     padding: 5px 12px;
     border-radius: 4px;
+}
+
+.tf-message-error {
+    color: #dc3545;
+    background-color: #dc354524;
+}
+
+.tf-message-success {
+    color: #2eaa2c;
+    background-color: #7beb5b24;
 }
 
 .tf-form-footer {
     color: #6c757d;
     margin-top: 6px !important;
+}
+
+.tf-account-nav {
+    right: 0;
+    position: absolute !important;
+}
+
+/* Header - Navigation */
+.tf-nav-item {
+  margin-left: 20px;
+  text-decoration: none;
+  color: var(--tf-primary-bg);
+}
+
+
+/**********************************************/
+/* Lists */
+
+.tf-list-container {
+  overflow-x: auto;
+  height: calc(100vh - 65px);
+}
+
+.tf-list-adder {
+  opacity: 0;
+  transition: all .3s ease;
+  margin: 60px 0;
+  padding: 15px;
+  font-size: 20px;
+}
+
+.tf-list-adder:hover {
+  opacity: 1;
+  padding: 0 25px;
+  transition: all .3s ease;
+  cursor: pointer;
+}
+
+
+
+.tf-list {
+  min-width: 280px;
+  max-width: 320px;
+  padding: 15px 15px;
+  margin: 60px 0;
+
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
+  color: var(--tf-primary-dark);
+  box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.5);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.tf-list-header {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  font-variant-caps: petite-caps;
+}
+
+.tf-list-tasks {
+  padding: 10px;
+}
+
+.tf-list-add {
+  text-align: center;
+  padding: 10px;
+}
+
+.tf-list-add button {
+  background: #90caf90a;
+  border-style: dashed;
+  border-color: var(--tf-primary-dark);
+  width: 100%;
+  height: 55px;
+  color: var(--tf-primary-dark);
+  font-size: 15px;
+  font-weight: bold;
+  transition: font-size .3s ease-out;
+}
+
+.tf-list-add button:hover {
+  transition: font-size .1s ease-in;
+  font-size: 16px;
+}
+
+
+/**********************************************/
+/* Tasks */
+
+.tf-task {
+  position: relative;
+  padding: 15px;
+  margin: 16px 0;
+  background-color: var(--tf-primary-bg);
+  color: var(--tf-primary-darken);
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+
+.tf-task:hover {
+  transition: transform .1s ease-in;
+  transform: scale(1.02);
+}
+
+/* Task Header */
+.tf-task-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tf-task-marker {
+  position: absolute;
+  top: -6px;
+  right: 6px;
+  margin-right: 5px;
+  font-size: 24px;
+  color: #003481;
+}
+
+.tf-task-header--id {
+  color: var(--tf-primary-dark);
+}
+
+.tf-task-header--title {
+  color: var(--tf-primary-darken);
+}
+
+.tf-list-title {
+  background-color: transparent;
+  border: inherit;
+  text-align: center;
+  width: 100%;
+  outline: none;
+  color: var(--tf-primary-bg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  font-weight: bold;
+}
+
+/* Task Info */
+
+.tf-task-info {
+  width: 100%;
+  display: flex;
+  display: inline-flex;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+
+/* Task Info - Date */
+
+.tf-task-date {
+  font-weight: bold;
+}
+
+.tf-task-date .bi-clock {
+  padding: 0 3px;
+  font-size: 14px;
+}
+
+
+/* Task Info - Users */
+
+.tf-task-users {
+  display: flex;
+  justify-content: end;
+  align-content: center;
+  flex-direction: row;
+}
+
+.tf-task-user {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 2px;
+  border-radius: 50%;
+  background-color: var(--tf-primary-dark);
+  color: #fff;
+  letter-spacing: -2px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.tf-task-user-initials {
+  margin-left: -2px;
+}
+
+.tf-list-tasks .tf-task:first-child {
+  margin-top: 0 !important;
+}
+
+.tf-list-tasks .tf-task:last-child {
+  margin-bottom: 0 !important;
+}
+
+.tooltip, .tooltip-inner {
+  white-space: pre-line;
+}
+
+
+/* Icons */
+.bi-watch {
+  font-size: 24px; /* Change the icon size */
 }

@@ -10,6 +10,7 @@ import Register from './screens/Register.js'
 import Home from './screens/Home.js';
 import { CssBaseline } from '@mui/material';
 import Logout from './screens/Logout.js';
+import UserAccount from './screens/UserAccount.js';
 
 const router = createBrowserRouter([
   {
@@ -25,14 +26,17 @@ const router = createBrowserRouter([
     element: <Register/>
   },
   {
+    path:'/account',
+    element: <UserAccount/>
+  },
+  {
     path:'/Home',
     element: <Home/>
   },
   {
-    path:'/Logout',
+    path:'/logout',
     element: <Logout/>
   }
-
 ]);
 
 const darkTheme = createTheme({

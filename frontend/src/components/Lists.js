@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Card, Button } from '@mui/material/';
-import Adapter, { post, del, get, put } from '../adapters/OrdinaryAdapter';
+import { del, get } from '../adapters/OrdinaryAdapter';
 import { createSvgIcon } from '@mui/material/utils';
 import Config from '../config.json';
 import { styled } from '@mui/system';
 import Tasks from './Tasks';
+
+import { HttpRequestAuth } from "../http";
+const httpAuth = new HttpRequestAuth();
 
 const PlusIcon = createSvgIcon(
     <svg
@@ -34,7 +37,6 @@ export default function Lists({ lists, updateListTitle }) {
 
     const [tempTitles, setTempTitles] = useState({});
     const [progressoCards, setProgressoCards] = useState({});
-    const [progressoCardSubtasks, setProgressoCardsSubtasks] = useState({});
 
     useEffect(() => {
         const initializeProgressoCards = () => {
@@ -116,15 +118,9 @@ export default function Lists({ lists, updateListTitle }) {
     };
     
 
-    const saveTaskToApi = async (taskData) => {
-        
-        try {            
-            const response = await post(Config.apiURL + 'task/', taskData);
-            return response.data;
-        } catch (error) {
-            console.error('Erro ao salvar tarefa na API:', error);
-            return null;
-        }
+    const saveTask = async (taskData) => {          
+        const response = await httpAuth.post(`${Config.BASEPATH}/task/`, taskData);
+        return response.data;
     };
 
     const saveToApi = async (listId, cardIndex, cardData) => {
@@ -132,26 +128,26 @@ export default function Lists({ lists, updateListTitle }) {
             cardData.startDate = formatDateToBR(cardData.startDate);
             cardData.endDate = formatDateToBR(cardData.endDate);
             console.log("cardData: ", cardData);
-            const newTask = await saveTaskToApi(cardData);
+            const newTask = await saveTask(cardData);
             console.log("newTask: ", newTask);
-            if (newTask) {
-                // Obtenha os nomes dos usuários selecionados
-                const updatedUsers = await getUsersByIds(newTask.users);
                 
-                // Atualize o estado de progressoCards com os nomes dos usuários
-                setProgressoCards(prev => {
-                    const updatedCards = prev[listId] ? [...prev[listId]] : [];
-                    updatedCards[cardIndex] = {
-                        ...newTask,
-                        isSaved: true,
-                        taskId: newTask.id,
-                        startDate: formatDateToScreen(newTask.startDate),
-                        endDate: formatDateToScreen(newTask.endDate),
-                        usersNames: updatedUsers.map(user => user.name) // Adicione os nomes dos usuários selecionados
-                    };
-                    return { ...prev, [listId]: updatedCards };
-                });
-            }
+            // Obtenha os nomes dos usuários selecionados
+            const updatedUsers = await getUsersByIds(newTask.users);
+                
+            // Atualize o estado de progressoCards com os nomes dos usuários
+            setProgressoCards(prev => {
+                const updatedCards = prev[listId] ? [...prev[listId]] : [];
+                updatedCards[cardIndex] = {
+                    ...newTask,
+                    isSaved: true,
+                    taskId: newTask.id,
+                    startDate: formatDateToScreen(newTask.startDate),
+                    endDate: formatDateToScreen(newTask.endDate),
+                    usersNames: updatedUsers.map(user => user.name) // Adicione os nomes dos usuários selecionados
+                };
+                return { ...prev, [listId]: updatedCards };
+            });
+
         } catch (error) {
             console.error('Erro ao salvar/atualizar tarefa:', error);
         }

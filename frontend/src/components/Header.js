@@ -43,7 +43,7 @@ export default function Header() {
             TASKFLOW
           </Typography>
 
-          <Link to="/home" style={{ marginLeft: '20px', textDecoration: 'none' }}>
+          <Link to="/home" className="tf-nav-item">
             <Typography variant="h6" noWrap component="span">
               Board
             </Typography>
