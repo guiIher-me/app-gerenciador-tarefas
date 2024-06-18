@@ -31,13 +31,19 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping(value="/", produces="application/json")
+    public ResponseEntity<User> getByToken() {
+        User user = userService.getCurrentUser();
+        return ResponseEntity.ok().body(user);
+    }
+
     @GetMapping(value="/{id}", produces="application/json")
     public ResponseEntity<User> getById(@PathVariable(value="id") @NonNull Long id) {
         User user = userService.getOrFail(id);
         return ResponseEntity.ok().body(user);
     }
 
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(value = "/all", produces = "application/json")
     public ResponseEntity<List<User>> getAll() {
         List<User> users = userRepository.findAll();
         return ResponseEntity.ok().body(users);
