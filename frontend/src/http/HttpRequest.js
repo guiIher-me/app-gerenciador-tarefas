@@ -21,6 +21,10 @@ class HttpRequest {
         return this.request("POST", url, data, headers);
     }
 
+    patch(url, data = {}, headers = {}) {
+        return this.request("PATCH", url, data, headers);
+    }
+
     put(url, data = {}, headers = {}) {
         return this.request("PUT", url, data, headers);
     }
